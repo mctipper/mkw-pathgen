@@ -19,7 +19,7 @@ export function renderTrackIcons(
 
     for (const track of Object.values(tracks)) {
         const icon = document.createElement('img');
-        icon.src = `/images/track-icons/${track.icon}`;
+        icon.src = `${import.meta.env.BASE_URL}images/track-icons/${track.icon}`;
         icon.alt = track.names.en_gb;
         icon.style.position = 'absolute';
         icon.style.width = `${iconSize}px`;

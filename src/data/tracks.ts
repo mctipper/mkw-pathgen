@@ -1,7 +1,7 @@
 import type { TrackMap } from '../types/track';
 
 export async function loadTracks(): Promise<TrackMap> {
-  const response = await fetch('/data/tracks.json');
+  const response = await fetch(`${import.meta.env.BASE_URL}/data/tracks.json`)
   if (!response.ok) {
     throw new Error(`Failed to load tracks: ${response.status}`);
   }
