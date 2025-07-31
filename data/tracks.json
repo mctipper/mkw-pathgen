@@ -1,0 +1,302 @@
+{
+    "0": {
+        "names": {
+            "en_gb": "Acorn Heights"
+        },
+        "icon": "00_acorn_heights.png",
+        "coords": {
+            "X": 669,
+            "Y": 129
+        }
+    },
+    "1": {
+        "names": {
+            "en_gb": "Airship Fortress"
+        },
+        "icon": "01_airship_fortress.png",
+        "coords": {
+            "X": 210,
+            "Y": 373
+        }
+    },
+    "2": {
+        "names": {
+            "en_gb": "Boo Cinema"
+        },
+        "icon": "02_boo_cinema.png",
+        "coords": {
+            "X": 843,
+            "Y": 200
+        }
+    },
+    "3": {
+        "names": {
+            "en_gb": "Bowser's Castle"
+        },
+        "icon": "03_bowsers_castle.png",
+        "coords": {
+            "X": 356,
+            "Y": 230
+        }
+    },
+    "4": {
+        "names": {
+            "en_gb": "Cheep Cheep Falls"
+        },
+        "icon": "04_cheep_cheep_falls.png",
+        "coords": {
+            "X": 836,
+            "Y": 622
+        }
+    },
+    "5": {
+        "names": {
+            "en_gb": "Choco Mountain"
+        },
+        "icon": "05_choco_mountain.png",
+        "coords": {
+            "X": 500,
+            "Y": 609
+        }
+    },
+    "6": {
+        "names": {
+            "en_gb": "Crown City"
+        },
+        "icon": "06_crown_city.png",
+        "coords": {
+            "X": 506,
+            "Y": 827
+        }
+    },
+    "7": {
+        "names": {
+            "en_gb": "Dandelion Depths"
+        },
+        "icon": "07_dandelion_depths.png",
+        "coords": {
+            "X": 828,
+            "Y": 435
+        }
+    },
+    "8": {
+        "names": {
+            "en_gb": "Desert Hills"
+        },
+        "icon": "08_desert_hills.png",
+        "coords": {
+            "X": 147,
+            "Y": 821
+        }
+    },
+    "9": {
+        "names": {
+            "en_gb": "Dino Dino Jungle"
+        },
+        "icon": "09_dino_dino_jungle.png",
+        "coords": {
+            "X": 870,
+            "Y": 1010
+        }
+    },
+    "10": {
+        "names": {
+            "en_gb": "DK Pass"
+        },
+        "icon": "10_dk_pass.png",
+        "coords": {
+            "X": 970,
+            "Y": 525
+        }
+    },
+    "11": {
+        "names": {
+            "en_gb": "DK Spaceport"
+        },
+        "icon": "11_dk_spaceport.png",
+        "coords": {
+            "X": 522,
+            "Y": 992
+        }
+    },
+    "12": {
+        "names": {
+            "en_gb": "Dry Bones Burnout"
+        },
+        "icon": "12_dry_bones_burnout.png",
+        "coords": {
+            "X": 500,
+            "Y": 218
+        }
+    },
+    "13": {
+        "names": {
+            "en_gb": "Faraway Oasis"
+        },
+        "icon": "13_faraway_oasis.png",
+        "coords": {
+            "X": 820,
+            "Y": 804
+        }
+    },
+    "14": {
+        "names": {
+            "en_gb": "Great ? Block Ruins"
+        },
+        "icon": "14_great_question_block_ruins.png",
+        "coords": {
+            "X": 1030,
+            "Y": 950
+        }
+    },
+    "15": {
+        "names": {
+            "en_gb": "Koopa Troopa Beach"
+        },
+        "icon": "15_koopa_troopa_beach.png",
+        "coords": {
+            "X": 660,
+            "Y": 945
+        }
+    },
+    "16": {
+        "names": {
+            "en_gb": "Mario Bros. Circuit"
+        },
+        "icon": "16_mario_bros_circuit.png",
+        "coords": {
+            "X": 310,
+            "Y": 703
+        }
+    },
+    "17": {
+        "names": {
+            "en_gb": "Mario Circuit"
+        },
+        "icon": "17_mario_circuit.png",
+        "coords": {
+            "X": 678,
+            "Y": 330
+        }
+    },
+    "18": {
+        "names": {
+            "en_gb": "Moo Moo Meadows"
+        },
+        "icon": "18_moo_moo_meadows.png",
+        "coords": {
+            "X": 669,
+            "Y": 488
+        }
+    },
+    "19": {
+        "names": {
+            "en_gb": "Peach Beach"
+        },
+        "icon": "19_peach_beach.png",
+        "coords": {
+            "X": 1137,
+            "Y": 813
+        }
+    },
+    "20": {
+        "names": {
+            "en_gb": "Peach Stadium"
+        },
+        "icon": "20_peach_stadium.png",
+        "coords": {
+            "X": 666,
+            "Y": 676
+        }
+    },
+    "21": {
+        "names": {
+            "en_gb": "Rainbow Road"
+        },
+        "icon": "21_rainbow_road.png",
+        "coords": {
+            "X": 666,
+            "Y": 810
+        }
+    },
+    "22": {
+        "names": {
+            "en_gb": "Salty Salty Speedway"
+        },
+        "icon": "22_salty_salty_speedway.png",
+        "coords": {
+            "X": 995,
+            "Y": 720
+        }
+    },
+    "23": {
+        "names": {
+            "en_gb": "Shy Guy Bazaar"
+        },
+        "icon": "23_shy_guy_bazaar.png",
+        "coords": {
+            "X": 156,
+            "Y": 585
+        }
+    },
+    "24": {
+        "names": {
+            "en_gb": "Sky-High Sundae"
+        },
+        "icon": "24_sky_high_sundae.png",
+        "coords": {
+            "X": 1128,
+            "Y": 415
+        }
+    },
+    "25": {
+        "names": {
+            "en_gb": "Starview Peak"
+        },
+        "icon": "25_starview_peak.png",
+        "coords": {
+            "X": 983,
+            "Y": 297
+        }
+    },
+    "26": {
+        "names": {
+            "en_gb": "Toad's Factory"
+        },
+        "icon": "26_toads_factory.png",
+        "coords": {
+            "X": 525,
+            "Y": 415
+        }
+    },
+    "27": {
+        "names": {
+            "en_gb": "Wario Stadium"
+        },
+        "icon": "27_wario_stadium.png",
+        "coords": {
+            "X": 345,
+            "Y": 509
+        }
+    },
+    "28": {
+        "names": {
+            "en_gb": "Wario's Galleon"
+        },
+        "icon": "28_warios_galleon.png",
+        "coords": {
+            "X": 1137,
+            "Y": 633
+        }
+    },
+    "29": {
+        "names": {
+            "en_gb": "Whistlestop Summit"
+        },
+        "icon": "29_whistlestop_summit.png",
+        "coords": {
+            "X": 318,
+            "Y": 951
+        }
+    }
+}
