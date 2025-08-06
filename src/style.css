@@ -122,16 +122,27 @@ header {
 }
 
 .generate-button {
+  width: 50%;
   padding: 10px;
-  font-size: 1rem;
-  background-color: #444;
-  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: #8b0000;
+  color: yellow;
   border: none;
   cursor: pointer;
-  width: 100%;
-  transition: background-color 0.2s ease;
+  position: relative;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black,
+    -1px 1px 0 black, 1px 1px 0 black;
+  /* < button > effect */
+  clip-path: polygon(10px 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0% 50%);
+  transition-property: background-color, color, text-shadow, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
 }
 
 .generate-button:hover {
-  background-color: #666;
+  background-color: red;
+  color: black;
+  text-shadow: -1px -1px 0 yellow, 1px -1px 0 yellow,
+    -1px 1px 0 yellow, 1px 1px 0 yellow;
 }
