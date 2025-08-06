@@ -13,7 +13,7 @@ async function init() {
   const refs = {
     trackIconLayer: document.querySelector<HTMLElement>('.track-icons-layer'),
     mapImg: document.querySelector<HTMLImageElement>('.base-map'),
-    mapControls: document.querySelector<HTMLImageElement>('.map-controls'),
+    pathGenControls: document.querySelector<HTMLImageElement>('.map-controls'),
     generateButton: document.querySelector<HTMLButtonElement>('.generate-button'),
     pathModeSelect: document.querySelector<HTMLSelectElement>('.path-options-dropdown'),
     includeSingleTrackCheck: document.querySelector<HTMLInputElement>('.include-single-track'),
@@ -32,14 +32,14 @@ async function init() {
   const {
     trackIconLayer,
     mapImg,
-    mapControls,
+    pathGenControls,
     generateButton,
     pathModeSelect,
     includeSingleTrackCheck,
   } = refs as {
     trackIconLayer: HTMLElement;
     mapImg: HTMLImageElement;
-    mapControls: HTMLImageElement;
+    pathGenControls: HTMLImageElement;
     generateButton: HTMLButtonElement;
     pathModeSelect: HTMLSelectElement;
     includeSingleTrackCheck: HTMLInputElement;
@@ -61,7 +61,7 @@ async function init() {
   // syncing to base image size
   function render() {
     syncElementToImage(trackIconLayer, mapImg);
-    syncElementWidthToImage(mapControls, mapImg);
+    syncElementWidthToImage(pathGenControls, mapImg);
     renderTrackIcons(tracks, trackIconLayer, mapImg, generateButton);
   }
   if (mapImg.complete) {
