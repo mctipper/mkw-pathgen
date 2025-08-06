@@ -5,11 +5,8 @@ import { renderTrackIcons } from './ui/renderTrackIcons';
 
 import type { TrackMap } from './types/track';
 import { handleButtonClick } from './ui/handleButtonClick';
+import { updateSingleTrackCheckboxState } from './ui/handleDropdownSelect';
 
-const trackIconLayer = document.querySelector<HTMLElement>('.track-icons-layer')!;
-const mapImg = document.querySelector<HTMLImageElement>('.base-map')!;
-const mapControls = document.querySelector<HTMLImageElement>('.map-controls')!;
-const generateButton = document.querySelector<HTMLButtonElement>('.generate-button')!;
 
 async function init() {
   // loading in the tracks data
