@@ -20,6 +20,11 @@ async function init() {
   generateButton.disabled = true;
   generateButton.addEventListener('click', handleButtonClick);
 
+  updateSingleTrackCheckboxState(pathModeSelect.value, includeSingleTrackCheck);
+  pathModeSelect.addEventListener('change', () =>
+    updateSingleTrackCheckboxState(pathModeSelect.value, includeSingleTrackCheck)
+  );
+
   // syncing to base image size
   function render() {
     syncElementToImage(trackIconLayer, mapImg);
