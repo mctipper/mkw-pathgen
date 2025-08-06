@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mario Kart World Path Generator (WIP)</title>
-  <script type="module" crossorigin src="/mkw-pathgen/assets/index-LqSI9u4K.js"></script>
-  <link rel="stylesheet" crossorigin href="/mkw-pathgen/assets/index-PQcaM-cw.css">
+  <script type="module" crossorigin src="/mkw-pathgen/assets/index-CwqJxcLb.js"></script>
+  <link rel="stylesheet" crossorigin href="/mkw-pathgen/assets/index-JFamnFPA.css">
 </head>
 
 <body>
@@ -14,11 +14,40 @@
     <header>
       Mario Kart World Path Generator (WIP)
     </header>
-
+    <div id="selected-track-store" hidden></div>
     <div class="map-wrapper">
       <img src="/mkw-pathgen/images/raw_mkw_map.png" alt="Map" class="base-map" />
       <div class="track-icons-layer"></div>
-      </canvas>
+      <div class="map-controls">
+        <div class="control-col">
+          <div class="selected-track">Select a track!</div>
+        </div>
+        <div class="control-col">
+          <div class="dropdown-row">
+            <select class="path-options-dropdown" required>
+              <option value="gp" default>Grand Prix</option>
+              <option value="kt">Knockout Tour</option>
+              <optgroup label="---VS Mode---"></optgroup>
+              <option value="vs3">3 Races</option>
+              <option value="vs4">4 Races</option>
+              <option value="vs5">5 Races</option>
+              <option value="vs6">6 Races</option>
+              <option value="vs8">8 Races</option>
+              <option value="vs12">12 Races</option>
+              <option value="vs16">16 Races</option>
+              <option value="vs32">32 Races</option>
+            </select>
+          </div>
+          <div class="checkbox-row">
+            <label><input type="checkbox" class="selected-track-end" />End with Selected</label>
+            <label><input type="checkbox" class="include-single-track" />Include Single-Track Race(s)</label>
+          </div>
+        </div>
+        <div class="control-row-full">
+          <button class="generate-button" disabled>GENERATE</button>
+        </div>
+      </div>
+
     </div>
   </div>
 
