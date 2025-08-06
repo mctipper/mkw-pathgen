@@ -97,9 +97,18 @@ header {
   margin-top: 10px;
 }
 
-.section-title {
+.selected-track {
   font-weight: bold;
   font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.selected-track.track-selected {
+  font-size: 2rem;
+  font-weight: bold;
+  font-style: italic;
+  color: #2c90f0;
+  text-shadow: 0 0 2px rgba(44, 144, 240, 0.5);
 }
 
 .path-options-dropdown {

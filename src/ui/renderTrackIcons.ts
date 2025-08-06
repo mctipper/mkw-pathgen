@@ -1,4 +1,5 @@
 import type { TrackMap } from '../types/track';
+import { handleTrackClick } from './handleTrackClick';
 
 export function renderTrackIcons(
     tracks: TrackMap,
@@ -8,16 +9,16 @@ export function renderTrackIcons(
     const scaleX = image.offsetWidth / image.naturalWidth;
     const scaleY = image.offsetHeight / image.naturalHeight;
 
-    // clear previous (to render in 'new' location)
     container.innerHTML = '';
 
-
-    // console.log(image.height);
     const iconSize = image.height / 10;
-    const halfSize = iconSize / 2; // for centering
+    const halfSize = iconSize / 2;
 
-    // for single selected icon handling
+    const trackSelected = document.querySelector<HTMLElement>('.selected-track')!;
+    const store = document.getElementById('selected-track-store')!;
+
     let selectedIcon: HTMLImageElement | null = null;
+    let selectedTrack: TrackMap[keyof TrackMap] | null = null;
 
     for (const track of Object.values(tracks)) {
         const icon = document.createElement('img');
@@ -26,19 +27,13 @@ export function renderTrackIcons(
         icon.style.position = 'absolute';
         icon.style.width = `${iconSize}px`;
         icon.style.height = `${iconSize}px`;
-        // hacky-centering
         icon.style.left = `${track.coords.X * scaleX - halfSize}px`;
         icon.style.top = `${track.coords.Y * scaleY - halfSize}px`;
 
         icon.addEventListener('click', () => {
-            if (selectedIcon && selectedIcon !== icon) {
-                selectedIcon.classList.remove('iconSelected');
-            }
-
-            const isSelected = icon.classList.toggle('iconSelected');
-            selectedIcon = isSelected ? icon : null;
-
-            console.log('Selected:', selectedIcon);
+            const result = handleTrackClick(icon, track, selectedIcon, trackSelected, store);
+            selectedIcon = result.newSelectedIcon;
+            selectedTrack = result.newSelectedTrack;
         });
 
         container.appendChild(icon);
