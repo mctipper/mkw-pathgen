@@ -1,4 +1,5 @@
 export type Track = {
+  id: string,
   names: {
     en_gb: string;
     [key: string]: string;
