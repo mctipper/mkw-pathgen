@@ -4,7 +4,8 @@ import { handleTrackClick } from './handleTrackClick';
 export function renderTrackIcons(
     tracks: TrackMap,
     container: HTMLElement,
-    image: HTMLImageElement
+    image: HTMLImageElement,
+    generateButton: HTMLButtonElement
 ) {
     const scaleX = image.offsetWidth / image.naturalWidth;
     const scaleY = image.offsetHeight / image.naturalHeight;
@@ -31,7 +32,7 @@ export function renderTrackIcons(
         icon.style.top = `${track.coords.Y * scaleY - halfSize}px`;
 
         icon.addEventListener('click', () => {
-            const result = handleTrackClick(icon, track, selectedIcon, trackSelected, store);
+            const result = handleTrackClick(icon, track, selectedIcon, trackSelected, store, generateButton);
             selectedIcon = result.newSelectedIcon;
             selectedTrack = result.newSelectedTrack;
         });

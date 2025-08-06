@@ -155,3 +155,10 @@ header {
   text-shadow: -1px -1px 0 yellow, 1px -1px 0 yellow,
     -1px 1px 0 yellow, 1px 1px 0 yellow;
 }
+
+.generate-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}

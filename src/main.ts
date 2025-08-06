@@ -4,33 +4,34 @@ import { loadTracks } from './data/tracks';
 import { renderTrackIcons } from './ui/renderTrackIcons';
 
 import type { TrackMap } from './types/track';
+import { handleButtonClick } from './ui/handleButtonClick';
 
 const trackIconLayer = document.querySelector<HTMLElement>('.track-icons-layer')!;
 const mapImg = document.querySelector<HTMLImageElement>('.base-map')!;
 const mapControls = document.querySelector<HTMLImageElement>('.map-controls')!;
+const generateButton = document.querySelector<HTMLButtonElement>('.generate-button')!;
 
 async function init() {
   // loading in the tracks data
-  let tracks: TrackMap = await loadTracks();
+  const tracks: TrackMap = await loadTracks();
   console.log('Tracks loaded:', tracks);
 
+  // handling of button disable (with override because html was being ignored)
+  generateButton.disabled = true;
+  generateButton.addEventListener('click', handleButtonClick);
+
   // syncing to base image size
-  if (mapImg.complete) {
+  function render() {
     syncElementToImage(trackIconLayer, mapImg);
     syncElementWidthToImage(mapControls, mapImg);
-    renderTrackIcons(tracks, trackIconLayer, mapImg);
-  } else {
-    mapImg.addEventListener('load', () => {
-      syncElementToImage(trackIconLayer, mapImg);
-      syncElementWidthToImage(mapControls, mapImg);
-      renderTrackIcons(tracks, trackIconLayer, mapImg);
-    });
+    renderTrackIcons(tracks, trackIconLayer, mapImg, generateButton);
   }
-  window.addEventListener('resize', () => {
-    syncElementToImage(trackIconLayer, mapImg);
-    syncElementWidthToImage(mapControls, mapImg);
-    renderTrackIcons(tracks, trackIconLayer, mapImg);
-  });
+  if (mapImg.complete) {
+    render();
+  } else {
+    mapImg.addEventListener('load', render);
+  }
+  window.addEventListener('resize', render);
 }
 
 init();
