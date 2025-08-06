@@ -39,22 +39,18 @@ header {
   height: auto;
   width: auto;
   display: block;
-  /* z-index: 0; */
 }
 
 .track-icons-layer {
   position: absolute;
   top: 0;
   left: 0;
-  /* z-index: 1; */
   pointer-events: none;
-  border: 3px solid green;
-  /* for debugging */
 }
 
 .track-icons-layer img {
   position: absolute;
-  /* z-index: 3; */
+  z-index: 1;
   pointer-events: auto;
   transition: transform 0.2s ease;
   transform-origin: center center;
@@ -62,11 +58,13 @@ header {
 
 .track-icons-layer img:hover {
   transform: scale(1.34);
+  z-index: 100;
   /* filter: drop-shadow(0 0 20px red); */
 }
 
 .track-icons-layer img.iconSelected {
-  transform: scale(2);
+  transform: scale(1.67);
+  z-index: 10;
   /* filter: drop-shadow(0 0 15px black); */
 }
 

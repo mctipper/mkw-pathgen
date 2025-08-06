@@ -12,7 +12,7 @@ export function renderTrackIcons(
 
     container.innerHTML = '';
 
-    const iconSize = image.height / 10;
+    const iconSize = image.height / 8;
     const halfSize = iconSize / 2;
 
     const trackSelected = document.querySelector<HTMLElement>('.selected-track')!;
