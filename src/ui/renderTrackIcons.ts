@@ -19,7 +19,6 @@ export function renderTrackIcons(
     const store = document.getElementById('selected-track-store')!;
 
     let selectedIcon: HTMLImageElement | null = null;
-    let selectedTrack: TrackMap[keyof TrackMap] | null = null;
 
     for (const track of Object.values(tracks)) {
         const icon = document.createElement('img');
@@ -34,7 +33,6 @@ export function renderTrackIcons(
         icon.addEventListener('click', () => {
             const result = handleTrackClick(icon, track, selectedIcon, trackSelected, store, generateButton);
             selectedIcon = result.newSelectedIcon;
-            selectedTrack = result.newSelectedTrack;
         });
 
         container.appendChild(icon);
