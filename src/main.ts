@@ -9,6 +9,42 @@ import { updateSingleTrackCheckboxState } from './ui/handleDropdownSelect';
 
 
 async function init() {
+  // validate that all require DOM layers have loaded
+  const refs = {
+    trackIconLayer: document.querySelector<HTMLElement>('.track-icons-layer'),
+    mapImg: document.querySelector<HTMLImageElement>('.base-map'),
+    mapControls: document.querySelector<HTMLImageElement>('.map-controls'),
+    generateButton: document.querySelector<HTMLButtonElement>('.generate-button'),
+    pathModeSelect: document.querySelector<HTMLSelectElement>('.path-options-dropdown'),
+    includeSingleTrackCheck: document.querySelector<HTMLInputElement>('.include-single-track'),
+  };
+
+  const missingRefs = Object.entries(refs)
+    .filter(([, el]) => el === null)
+    .map(([key]) => key);
+
+  if (missingRefs.length > 0) {
+    const plural: string = missingRefs.length > 1 ? 's' : ''
+    console.error(`Missing required DOM element${plural}: ${missingRefs.join(', ')}`);
+    return;
+  }
+
+  const {
+    trackIconLayer,
+    mapImg,
+    mapControls,
+    generateButton,
+    pathModeSelect,
+    includeSingleTrackCheck,
+  } = refs as {
+    trackIconLayer: HTMLElement;
+    mapImg: HTMLImageElement;
+    mapControls: HTMLImageElement;
+    generateButton: HTMLButtonElement;
+    pathModeSelect: HTMLSelectElement;
+    includeSingleTrackCheck: HTMLInputElement;
+  };
+
   // loading in the tracks data
   const tracks: TrackMap = await loadTracks();
   console.log('Tracks loaded:', tracks);
