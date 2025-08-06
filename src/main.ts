@@ -4,7 +4,7 @@ import { loadTracks } from './data/tracks';
 import { renderTrackIcons } from './ui/renderTrackIcons';
 
 import type { TrackMap } from './types/track';
-import { handleButtonClick } from './ui/handleButtonClick';
+import { handleGenerateButtonClick } from './ui/handleGenerateButtonClick';
 import { updateSingleTrackCheckboxState } from './ui/handleDropdownSelect';
 
 
@@ -58,7 +58,7 @@ async function init() {
 
   // handling of button disable (with override because html was being ignored)
   generateButton.disabled = true;
-  generateButton.addEventListener('click', () => handleButtonClick(
+  generateButton.addEventListener('click', () => handleGenerateButtonClick(
     selectedTrackStore,
     pathModeSelect,
     selectedTrackEnd,

@@ -9,7 +9,7 @@ function isTrack(obj: any): obj is Track {
     );
 }
 
-export function handleButtonClick(selectedTrackStore: HTMLElement, pathModeSelect: HTMLSelectElement, selectedTrackEnd: HTMLInputElement, includeSingleTrackCheck: HTMLInputElement) {
+export function handleGenerateButtonClick(selectedTrackStore: HTMLElement, pathModeSelect: HTMLSelectElement, selectedTrackEnd: HTMLInputElement, includeSingleTrackCheck: HTMLInputElement) {
     // safety checks first up, "should" never occur as button is disabled without a track selection
     const raw = selectedTrackStore.textContent?.trim();
     if (!raw) {
