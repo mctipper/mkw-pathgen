@@ -1,6 +1,7 @@
 import type { Track } from '../types/track';
 
 function isTrack(obj: any): obj is Track {
+    // ts was of typesafety without explicit casting
     return (
         obj &&
         typeof obj === 'object' &&
@@ -8,29 +9,28 @@ function isTrack(obj: any): obj is Track {
     );
 }
 
-export function handleButtonClick() {
-    // safety checks first up
-    const store = document.getElementById('selected-track-store');
-    if (!store) {
-        console.warn('selected-track-store element not found');
-        return;
-    }
-
-    const raw = store.textContent?.trim();
+export function handleButtonClick(selectedTrackStore: HTMLElement, pathModeSelect: HTMLSelectElement, selectedTrackEnd: HTMLInputElement, includeSingleTrackCheck: HTMLInputElement) {
+    // safety checks first up, "should" never occur as button is disabled without a track selection
+    const raw = selectedTrackStore.textContent?.trim();
     if (!raw) {
         console.log('No track selected');
         return;
     }
 
     // parse it out
+    const track = JSON.parse(raw);
     try {
-        const parsed = JSON.parse(raw);
-        if (isTrack(parsed)) {
-            console.log('Selected track:', parsed.names.en_gb);
-        } else {
-            console.warn('Parsed data is not a valid Track:', parsed);
+        if (!isTrack(track)) {
+            console.warn('Parsed data is not a valid Track:', track);
+            return;
         }
     } catch (err) {
         console.error('Failed to parse track from store:', err);
+        return;
     }
+
+    console.log('Selected track:', track.names.en_gb);
+    console.log('Selected path mode:', pathModeSelect.value);
+    console.log('Selected "end with":', selectedTrackEnd.checked);
+    console.log('Selected include single-track:', includeSingleTrackCheck.checked);
 }

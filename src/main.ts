@@ -11,11 +11,13 @@ import { updateSingleTrackCheckboxState } from './ui/handleDropdownSelect';
 async function init() {
   // validate that all require DOM layers have loaded
   const refs = {
+    selectedTrackStore: document.querySelector<HTMLElement>('#selected-track-store'),
     trackIconLayer: document.querySelector<HTMLElement>('.track-icons-layer'),
     mapImg: document.querySelector<HTMLImageElement>('.base-map'),
     pathGenControls: document.querySelector<HTMLImageElement>('.map-controls'),
     generateButton: document.querySelector<HTMLButtonElement>('.generate-button'),
     pathModeSelect: document.querySelector<HTMLSelectElement>('.path-options-dropdown'),
+    selectedTrackEnd: document.querySelector<HTMLInputElement>('.selected-track-end'),
     includeSingleTrackCheck: document.querySelector<HTMLInputElement>('.include-single-track'),
   };
 
@@ -29,19 +31,24 @@ async function init() {
     return;
   }
 
+  // allow to pass the same elements to each listener
   const {
+    selectedTrackStore,
     trackIconLayer,
     mapImg,
     pathGenControls,
     generateButton,
     pathModeSelect,
+    selectedTrackEnd,
     includeSingleTrackCheck,
   } = refs as {
+    selectedTrackStore: HTMLElement;
     trackIconLayer: HTMLElement;
     mapImg: HTMLImageElement;
     pathGenControls: HTMLImageElement;
     generateButton: HTMLButtonElement;
     pathModeSelect: HTMLSelectElement;
+    selectedTrackEnd: HTMLInputElement;
     includeSingleTrackCheck: HTMLInputElement;
   };
 
@@ -51,8 +58,14 @@ async function init() {
 
   // handling of button disable (with override because html was being ignored)
   generateButton.disabled = true;
-  generateButton.addEventListener('click', handleButtonClick);
+  generateButton.addEventListener('click', () => handleButtonClick(
+    selectedTrackStore,
+    pathModeSelect,
+    selectedTrackEnd,
+    includeSingleTrackCheck
+  ));
 
+  // override because html default not applying
   updateSingleTrackCheckboxState(pathModeSelect.value, includeSingleTrackCheck);
   pathModeSelect.addEventListener('change', () =>
     updateSingleTrackCheckboxState(pathModeSelect.value, includeSingleTrackCheck)
