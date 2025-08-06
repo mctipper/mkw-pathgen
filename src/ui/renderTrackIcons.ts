@@ -16,6 +16,8 @@ export function renderTrackIcons(
     const iconSize = image.height / 10;
     const halfSize = iconSize / 2; // for centering
 
+    // for single selected icon handling
+    let selectedIcon: HTMLImageElement | null = null;
 
     for (const track of Object.values(tracks)) {
         const icon = document.createElement('img');
@@ -24,15 +26,20 @@ export function renderTrackIcons(
         icon.style.position = 'absolute';
         icon.style.width = `${iconSize}px`;
         icon.style.height = `${iconSize}px`;
-
-        icon.addEventListener('click', () => {
-            console.log('Selected:', icon);
-            icon.classList.toggle('iconSelected');
-        });
-
         // hacky-centering
         icon.style.left = `${track.coords.X * scaleX - halfSize}px`;
         icon.style.top = `${track.coords.Y * scaleY - halfSize}px`;
+
+        icon.addEventListener('click', () => {
+            if (selectedIcon && selectedIcon !== icon) {
+                selectedIcon.classList.remove('iconSelected');
+            }
+
+            const isSelected = icon.classList.toggle('iconSelected');
+            selectedIcon = isSelected ? icon : null;
+
+            console.log('Selected:', selectedIcon);
+        });
 
         container.appendChild(icon);
     }
