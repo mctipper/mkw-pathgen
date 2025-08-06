@@ -16,7 +16,36 @@
     <div class="map-wrapper">
       <img src="/images/raw_mkw_map.png" alt="Map" class="base-map" />
       <div class="track-icons-layer"></div>
-      </canvas>
+      <div class="map-controls">
+        <div class="control-col">
+          <div class="section-title">Select a track!</div>
+        </div>
+        <div class="control-col">
+          <div class="dropdown-row">
+            <select id="path-mode" class="path-options-dropdown" required>
+              <option value="gp">Grand Prix</option>
+              <option value="kt">Knockout Tour</option>
+              <optgroup label="---VS Mode---"></optgroup>
+              <option value="vs3">3 Races</option>
+              <option value="vs4">4 Races</option>
+              <option value="vs5">5 Races</option>
+              <option value="vs6">6 Races</option>
+              <option value="vs8">8 Races</option>
+              <option value="vs12">12 Races</option>
+              <option value="vs16">16 Races</option>
+              <option value="vs32">32 Races</option>
+            </select>
+          </div>
+          <div class="checkbox-row">
+            <label><input type="checkbox" id="selected-track-end" />End with Selected</label>
+            <label><input type="checkbox" id="include-single-track" />Include Single-Track Race(s)</label>
+          </div>
+        </div>
+        <div class="control-row-full">
+          <button class="generate-button">Generate</button>
+        </div>
+      </div>
+
     </div>
   </div>
 

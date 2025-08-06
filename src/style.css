@@ -26,8 +26,9 @@ header {
 .map-wrapper {
   position: relative;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   height: 100%;
   overflow: hidden;
 }
@@ -47,7 +48,8 @@ header {
   left: 0;
   /* z-index: 1; */
   pointer-events: none;
-  border: 3px solid green; /* for debugging */
+  border: 3px solid green;
+  /* for debugging */
 }
 
 .track-icons-layer img {
@@ -66,4 +68,70 @@ header {
 .track-icons-layer img.iconSelected {
   transform: scale(2);
   /* filter: drop-shadow(0 0 15px black); */
+}
+
+.map-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+  padding: 15px 20px;
+  background-color: #1a1a1a;
+  border-top: 1px solid #444;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
+.control-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.control-row-full {
+  grid-column: 1 / 3;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.section-title {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.path-options-dropdown {
+  padding: 8px;
+  font-size: 1rem;
+  background-color: #222;
+  color: white;
+  width: 100%;
+  border: 1px solid #555;
+}
+
+.checkbox-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5px;
+  font-size: 0.9rem;
+  width: 100%;
+  color: #ccc;
+}
+
+.generate-button {
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #444;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.generate-button:hover {
+  background-color: #666;
 }

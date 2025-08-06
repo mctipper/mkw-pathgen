@@ -11,3 +11,14 @@ export function syncElementToImage(
         // element.style.top = `${rect.top + window.scrollY}px`; // top is offset because of header
     });
 }
+
+
+export function syncElementWidthToImage(
+    element: HTMLElement,
+    image: HTMLImageElement
+) {
+    requestAnimationFrame(() => {
+        const rect = image.getBoundingClientRect();
+        element.style.width = `${rect.width}px`;
+    });
+}
