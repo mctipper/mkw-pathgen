@@ -1,11 +1,10 @@
 import './style.css';
 import { syncElementToImage, syncElementWidthToImage } from './ui/syncToBase';
 import { renderTrackIcons } from './ui/renderTrackIcons';
-
+import { disableGenerateButton } from './ui/toggleGenerateButton';
 import { handleGenerateButtonClick } from './logic/handleGenerateButtonClick';
 import { updateSingleTrackCheckboxState } from './logic/handleDropdownSelect';
 import { initTrackMapStore } from './stores/TrackMapStore';
-import { disableGenerateButton } from './ui/toggleGenerateButton';
 
 
 async function init() {
