@@ -21,25 +21,34 @@ Just some deets on the stuff going on in the background.
 
 ### Traversing
 
-Uses depth-first-search, with caveats. An adjacency list of tracks and their linked tracks was put together (found in ./public/data/tracks.json and /public/data/adjacency.json) by looking at all the VS options, and is used to store the graph of connectivity between all the tracks.
+Uses depth-first-search, with caveats. An adjacency list of tracks and their linked tracks was put together (found in `./public/data/tracks.json` and `./public/data/adjacency.json`) by looking at all the VS options, and is used to store the graph of connectivity between all the tracks.
 
 The caveats as mentioned are either universal or specific to the mode selected.
 
-_All modes_ prevent the exact same traversal to be repeated, so once have driven A-B that path cannot repeat in the traversal again (includes single-track (ie. 3 lap) races from occuring again). I put the code in to prevent _reverse_ traversal but decided to comment it out as its really a different track tbh: 'A-B' and 'B-A' should be considered distinct.
+- **All modes** prevent the exact same traversal to be repeated, so once have driven A-B that path cannot repeat in the traversal again (includes single-track (ie. 3 lap) races from occuring again). I put the code in to prevent _reverse_ traversal but decided to comment it out as its really a different track tbh: 'A-B' and 'B-A' should be considered distinct.
 
-_All modes_ also prevent 'u-turns', so A-B-A is not permitted, this is to prevent back-and-forth loops. However A-B-B-A or A-B-C-D-B-A are both permitted, as there was another race before the reverse traversal (also see prev paragraph).
+- **All modes** also prevent 'u-turns', so A-B-A is not permitted, this is to prevent back-and-forth loops. However A-B-B-A or A-B-C-D-B-A are both permitted, as there was another race before the reverse traversal (also see prev paragraph).
 
-_Grand Prix_ always starts with a single-track (ie. 3 lap) race, followed by 3 intermissions. Track revisiting is not permitted.
+**Grand Prix** always starts with a single-track (ie. 3 lap) race, followed by 3 intermissions. Track revisiting is not permitted.
 
-_Knockout Tour_ is 5 intermissions. Track revisiting is not permitted.
+**Knockout Tour** is 5 intermissions. Track revisiting is not permitted.
 
-_VS Mode_ length depends on the option selected. Track revisiting is permitted, with single-track race inclusion also able to be configured.
+**VS Mode** length depends on the option selected. Track revisiting is permitted, with single-track race inclusion also able to be configured.
 
 If a path cannot be found (ie. starting from Rainbow Road), an empty path is returned and a little message displayed just to inform. The number of permutations is in the millions so being unable to find a path is almost zero% chance of occuring otherwise.
 
+## TODO
+
+- would like to get % breakdowns of each track/intermissions (with ranges for path branching) so can return the % of road coverage for the returned path.
+- some colour (monochrome) rendering on the map based on the resutling path remaining 'colour' and the rest going black and white
+- with the drawing animation, make the icons increase in size _as each path arrives at that track_
+- store generated paths, allow going 'back' and 'forward' though history (stored locally, session only because who cares)
+- generate a list of 00s of 'mario themed' items and give a random name to each generated path ('Poison Mushroom Cup' / 'Goomba Shoe Rally' etc...). Maybe use the % breakdown of track covered (dot-point-1) to 'guide' these so have 'ice' themed or 'lava' themed names have greater chance of being used if >x% of the track is lava etc...
+- the dreaded post-completion refactor: some of the modules are serving multiple purposes so should tidy that up, and give future self a hand and comment it out better. Some unit tests would have been a good idea.
+
 ## Setup
 
-Build with `vite` and `TS`, I haven't bothered with dev or prod builds or any of that guff as this is a side-proj nothing more. Versions are above in the fancy badge things. `npm install` to build the little node env, then `npm run dev` to get it up and running. There is also a `devcontainer` set up already to make it easier.
+Build with `vite` and `TS`, I haven't bothered with dev or prod builds or any of that guff as this is a side-proj nothing more. Versions are above in the fancy badge things. `npm install` to build the little node env, then `npm run dev` to get it up and running. There is also a `devcontainer` set up already to make it easier because isolation just makes everything better.
 
 ## Credits
 
