@@ -68,7 +68,8 @@ export async function drawPathLines(path: string[]) {
     };
 
     const animateCircleOverlay = async (x: number, y: number) => {
-        const radius = 50;
+
+        const radius = mapImg.height / 15;
 
         const createCircle = (stroke: string, width: number, dash?: string, opacity?: number): SVGCircleElement => {
             const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
