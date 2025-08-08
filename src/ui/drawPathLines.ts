@@ -19,8 +19,8 @@ export function resetPathIcons(path: string[]) {
 }
 
 export function resetPathLines() {
-    const svg = document.querySelector('.path-lines-layer') as SVGSVGElement;
-    svg.innerHTML = '';
+    // just call drawPathLines with an empty array to reset AND interupt
+    drawPathLines([]);
 }
 
 export async function drawPathLines(path: string[]) {
@@ -33,7 +33,7 @@ export async function drawPathLines(path: string[]) {
     if (!mapImg) return;
 
     // reset all previous
-    resetPathLines();
+    svg.innerHTML = '';
     resetPathIcons(path);
 
     // centre of each icon, using the images to ensure scaling issues are handled
