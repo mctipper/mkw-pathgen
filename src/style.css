@@ -50,10 +50,10 @@ header {
 
 .track-icon {
   position: absolute;
-  z-index: 1;
   pointer-events: auto;
   transition: transform 0.2s ease;
   transform-origin: center center;
+  z-index: 10;
 }
 
 .track-icon:hover {
@@ -64,13 +64,30 @@ header {
 
 .track-icon.iconSelected {
   transform: scale(1.67);
-  z-index: 10;
+  z-index: 50;
   /* filter: drop-shadow(0 0 15px black); */
 }
 
 .track-icon.iconNotSelected {
   transform: scale(0.67);
   z-index: 0;
+}
+
+.track-icon.path {
+  transform: scale(1.2);
+  z-index: 30;
+  /* filter: drop-shadow(0 0 15px black); */
+}
+
+.path-lines-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 20;
+  /* below path/selected/hover icons */
 }
 
 .map-controls {

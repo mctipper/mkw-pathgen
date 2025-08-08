@@ -3,6 +3,7 @@ import { getTrackMap } from '../stores/TrackMapStore';
 import { generateGrandPrix } from '../pathgen/grandprix';
 import { generateKnockoutTour } from '../pathgen/knockouttour';
 import { generateVSMode } from '../pathgen/vs';
+import { drawPathLines } from '../ui/drawPathLines';
 
 
 export function handleGenerateButtonClick(pathModeSelect: HTMLSelectElement, selectedTrackEnd: HTMLInputElement, includeSingleTrackCheck: HTMLInputElement) {
@@ -35,8 +36,11 @@ export function handleGenerateButtonClick(pathModeSelect: HTMLSelectElement, sel
             const races: number = Number(pathModeValue.replace('vs', ''))
             return generateVSMode(trackMap, selectedTrack.id, races, selectedTrackEnd.checked, includeSingleTrackCheck.checked)
         }
-        return 'How did you get here';
+        return ['How did you get here'];
     })();
 
     console.log(path);
+
+    // draw the path on the map
+    drawPathLines(path);
 }
