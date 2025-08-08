@@ -17,7 +17,7 @@ async function init() {
     pathGenControls: document.querySelector<HTMLImageElement>('.map-controls'),
     generateButton: document.querySelector<HTMLButtonElement>('.generate-button'),
     pathModeSelect: document.querySelector<HTMLSelectElement>('.path-options-dropdown'),
-    selectedTrackEnd: document.querySelector<HTMLInputElement>('.selected-track-end'),
+    selectedTrackEndCheck: document.querySelector<HTMLInputElement>('.selected-track-end'),
     includeSingleTrackCheck: document.querySelector<HTMLInputElement>('.include-single-track'),
   };
 
@@ -40,7 +40,7 @@ async function init() {
     pathGenControls,
     generateButton,
     pathModeSelect,
-    selectedTrackEnd,
+    selectedTrackEndCheck,
     includeSingleTrackCheck,
   } = refs as {
     trackMapStore: HTMLElement
@@ -50,20 +50,19 @@ async function init() {
     pathGenControls: HTMLImageElement;
     generateButton: HTMLButtonElement;
     pathModeSelect: HTMLSelectElement;
-    selectedTrackEnd: HTMLInputElement;
+    selectedTrackEndCheck: HTMLInputElement;
     includeSingleTrackCheck: HTMLInputElement;
   };
 
   // loading in the tracks data
-  const tracks: TrackMap = await loadTracks();
-  console.log('Tracks loaded:', tracks);
+  await initTrackMapStore(trackMapStore);
 
   // handling of button disable (with override because html was being ignored)
   generateButton.disabled = true;
   generateButton.addEventListener('click', () => handleGenerateButtonClick(
     selectedTrackStore,
     pathModeSelect,
-    selectedTrackEnd,
+    selectedTrackEndCheck,
     includeSingleTrackCheck
   ));
 
@@ -77,8 +76,10 @@ async function init() {
   function render() {
     syncElementToImage(trackIconLayer, mapImg);
     syncElementWidthToImage(pathGenControls, mapImg);
-    renderTrackIcons(tracks, trackIconLayer, mapImg, generateButton);
+    renderTrackIcons(trackIconLayer, mapImg, generateButton, selectedTrackStore);
   }
+
+  // upon load or resize
   if (mapImg.complete) {
     render();
   } else {
