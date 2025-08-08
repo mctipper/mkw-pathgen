@@ -34,7 +34,6 @@ async function init() {
   // allow to pass the same elements to each listener
   const {
     trackMapStore,
-    selectedTrackStore,
     trackIconLayer,
     mapImg,
     pathGenControls,
@@ -44,7 +43,6 @@ async function init() {
     includeSingleTrackCheck,
   } = refs as {
     trackMapStore: HTMLElement
-    selectedTrackStore: HTMLElement;
     trackIconLayer: HTMLElement;
     mapImg: HTMLImageElement;
     pathGenControls: HTMLImageElement;
@@ -60,7 +58,6 @@ async function init() {
   // handling of button disable (with override because html was being ignored)
   disableGenerateButton();
   generateButton.addEventListener('click', () => handleGenerateButtonClick(
-    selectedTrackStore,
     pathModeSelect,
     selectedTrackEndCheck,
     includeSingleTrackCheck
