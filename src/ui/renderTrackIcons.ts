@@ -1,11 +1,12 @@
+import { getTrackMap } from '../state/trackMapStore';
 import type { TrackMap } from '../types/track';
 import { handleTrackClick } from './handleTrackClick';
 
 export function renderTrackIcons(
-    tracks: TrackMap,
     container: HTMLElement,
     image: HTMLImageElement,
-    generateButton: HTMLButtonElement
+    generateButton: HTMLButtonElement,
+    selectedTrackStore: HTMLElement
 ) {
     const scaleX = image.offsetWidth / image.naturalWidth;
     const scaleY = image.offsetHeight / image.naturalHeight;
@@ -22,6 +23,7 @@ export function renderTrackIcons(
 
     for (const track of Object.values(trackMap)) {
         const icon = document.createElement('img');
+        icon.className = 'track-icon';
         icon.src = `${import.meta.env.BASE_URL}images/track-icons/${track.icon}`;
         icon.alt = track.names.en_gb;
         icon.style.position = 'absolute';
@@ -31,7 +33,7 @@ export function renderTrackIcons(
         icon.style.top = `${track.coords.Y * scaleY - halfSize}px`;
 
         icon.addEventListener('click', () => {
-            const result = handleTrackClick(icon, track, selectedIcon, trackSelected, store, generateButton);
+            const result = handleTrackClick(icon, track, selectedIcon, trackSelectedText, selectedTrackStore, generateButton);
             selectedIcon = result.newSelectedIcon;
         });
 

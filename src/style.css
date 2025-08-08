@@ -48,7 +48,7 @@ header {
   pointer-events: none;
 }
 
-.track-icons-layer img {
+.track-icon {
   position: absolute;
   z-index: 1;
   pointer-events: auto;
@@ -56,16 +56,21 @@ header {
   transform-origin: center center;
 }
 
-.track-icons-layer img:hover {
+.track-icon:hover {
   transform: scale(1.34);
   z-index: 100;
   /* filter: drop-shadow(0 0 20px red); */
 }
 
-.track-icons-layer img.iconSelected {
+.track-icon.iconSelected {
   transform: scale(1.67);
   z-index: 10;
   /* filter: drop-shadow(0 0 15px black); */
+}
+
+.track-icon.iconNotSelected {
+  transform: scale(0.67);
+  z-index: 0;
 }
 
 .map-controls {

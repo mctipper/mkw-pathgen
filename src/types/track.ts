@@ -9,6 +9,8 @@ export type Track = {
     X: number;
     Y: number;
   };
+  parents: [];
+  children: [];
 };
 
 export type TrackMap = {
