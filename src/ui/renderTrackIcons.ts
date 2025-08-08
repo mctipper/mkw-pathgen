@@ -22,6 +22,7 @@ export function renderTrackIcons(
     for (const track of Object.values(trackMap)) {
         const icon = document.createElement('img');
         icon.className = 'track-icon';
+        icon.id = track.id;
         icon.src = `${import.meta.env.BASE_URL}images/track-icons/${track.icon}`;
         icon.alt = track.names.en_gb;
         icon.style.position = 'absolute';
