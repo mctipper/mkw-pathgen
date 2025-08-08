@@ -43,6 +43,7 @@ If a path cannot be found (ie. starting from Rainbow Road), an empty path is ret
 - some colour (monochrome) rendering on the map based on the resutling path remaining 'colour' and the rest going black and white
 - with the drawing animation, make the icons increase in size _as each path arrives at that track_
 - store generated paths, allow going 'back' and 'forward' though history (stored locally, session only because who cares)
+- fix up that dashed line animation yucks
 - generate a list of 00s of 'mario themed' items and give a random name to each generated path ('Poison Mushroom Cup' / 'Goomba Shoe Rally' etc...). Maybe use the % breakdown of track covered (dot-point-1) to 'guide' these so have 'ice' themed or 'lava' themed names have greater chance of being used if >x% of the track is lava etc...
 - the dreaded post-completion refactor: some of the modules are serving multiple purposes so should tidy that up, and give future self a hand and comment it out better. Some unit tests would have been a good idea.
 
