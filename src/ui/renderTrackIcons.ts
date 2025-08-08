@@ -1,8 +1,8 @@
 import { getTrackMap } from '../stores/TrackMapStore';
 import type { TrackMap } from '../types/track';
 import { handleTrackClick } from '../logic/handleTrackClick';
-import { resetPathResultsList } from './renderPathResultsList';
-import { resetPathLines } from './renderPathLines';
+// import { resetPathResultsList } from './renderPathResultsList';
+// import { resetPathLines } from './renderPathLines';
 
 export function renderTrackIcons(
     container: HTMLElement,
@@ -22,8 +22,10 @@ export function renderTrackIcons(
     const trackMap: TrackMap = getTrackMap();
 
     // reset all previous
-    resetPathLines();
-    resetPathResultsList();
+    // decided to remove this as mobile scrolling triggers "resize" when address bar is removed.
+    // the lines will appear misaligned if resize after drawing them, but meh can live with that
+    // resetPathLines();
+    // resetPathResultsList();
 
     for (const track of Object.values(trackMap)) {
         const icon = document.createElement('img');
