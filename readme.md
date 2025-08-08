@@ -39,6 +39,7 @@ If a path cannot be found (ie. starting from Rainbow Road), an empty path is ret
 
 ## TODO
 
+- remove the passing around of the elements between methods. Once they have been confirmed loaded its safe to `querySelector` them when needed; will just make the code tidier really (althought its not that bad really)
 - would like to get % breakdowns of each track/intermissions (with ranges for path branching) so can return the % of road coverage for the returned path.
 - some colour (monochrome) rendering on the map based on the resutling path remaining 'colour' and the rest going black and white
 - with the drawing animation, make the icons increase in size _as each path arrives at that track_
