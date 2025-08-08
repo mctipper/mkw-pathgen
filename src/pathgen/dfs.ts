@@ -42,11 +42,14 @@ export function dfsTraversal(
             // determine if next path traversed already 
             // (also prevents multiple single-track events of the same track)
             const linkKey = `${currentId}->${nextId}`;
+            // const linkKeyRev = `${nextId}->${currentId}`; // include 'other direction'
             if (visitedLinks.has(linkKey)) continue;
+            // if (visitedLinks.has(linkKeyRev)) continue;
 
             // new traversal found, give it a go
             visitedTracks.add(nextId);
             visitedLinks.add(linkKey);
+            // visitedLinks.add(linkKeyRev);
             traverse(nextId);
         }
     };
