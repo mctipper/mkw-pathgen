@@ -2,6 +2,7 @@ import { getSelectedTrack } from '../stores/SelectedTrackStore';
 import { getTrackMap } from '../stores/TrackMapStore';
 import { generateGrandPrix } from '../pathgen/grandprix';
 import { generateKnockoutTour } from '../pathgen/knockouttour';
+import { generateVSMode } from '../pathgen/vs';
 
 
 export function handleGenerateButtonClick(pathModeSelect: HTMLSelectElement, selectedTrackEnd: HTMLInputElement, includeSingleTrackCheck: HTMLInputElement) {
@@ -31,7 +32,8 @@ export function handleGenerateButtonClick(pathModeSelect: HTMLSelectElement, sel
         }
 
         if (pathModeValue.startsWith('vs')) {
-            return 'Not implmented';
+            const races: number = Number(pathModeValue.replace('vs', ''))
+            return generateVSMode(trackMap, selectedTrack.id, races, selectedTrackEnd.checked, includeSingleTrackCheck.checked)
         }
         return 'How did you get here';
     })();
