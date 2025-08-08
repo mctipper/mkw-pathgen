@@ -1,4 +1,4 @@
-import { loadTracks } from '../data/tracks';
+import { loadTracks } from '../data/loadTracks';
 import type { TrackMap } from '../types/track';
 
 let trackMap: TrackMap | null = null;
