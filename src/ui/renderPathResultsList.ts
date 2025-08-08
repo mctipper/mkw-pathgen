@@ -12,6 +12,11 @@ export function renderPathResultsList(path: string[]) {
     const pathResultsText = document.querySelector('.path-results-text');
     if (!pathResultsText) return;
 
+    if (path.length === 0) {
+        // if a path could not be found (i.e. Rainbow Road selected without 'end with selected')
+        pathResultsText.innerHTML = 'No Path Found from Selected Track'
+    }
+
     const trackMap = getTrackMap();
 
     const list = document.createElement('ul');
