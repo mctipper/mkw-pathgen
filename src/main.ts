@@ -2,9 +2,10 @@ import './style.css';
 import { syncElementToImage, syncElementWidthToImage } from './ui/syncToBase';
 import { renderTrackIcons } from './ui/renderTrackIcons';
 
-import { handleGenerateButtonClick } from './ui/handleGenerateButtonClick';
-import { updateSingleTrackCheckboxState } from './ui/handleDropdownSelect';
-import { initTrackMapStore } from './state/trackMapStore';
+import { handleGenerateButtonClick } from './logic/handleGenerateButtonClick';
+import { updateSingleTrackCheckboxState } from './logic/handleDropdownSelect';
+import { initTrackMapStore } from './stores/TrackMapStore';
+import { disableGenerateButton } from './ui/toggleGenerateButton';
 
 
 async function init() {
@@ -58,7 +59,7 @@ async function init() {
   await initTrackMapStore(trackMapStore);
 
   // handling of button disable (with override because html was being ignored)
-  generateButton.disabled = true;
+  disableGenerateButton();
   generateButton.addEventListener('click', () => handleGenerateButtonClick(
     selectedTrackStore,
     pathModeSelect,
@@ -76,7 +77,7 @@ async function init() {
   function render() {
     syncElementToImage(trackIconLayer, mapImg);
     syncElementWidthToImage(pathGenControls, mapImg);
-    renderTrackIcons(trackIconLayer, mapImg, generateButton, selectedTrackStore);
+    renderTrackIcons(trackIconLayer, mapImg);
   }
 
   // upon load or resize

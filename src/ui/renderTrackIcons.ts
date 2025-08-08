@@ -1,12 +1,10 @@
-import { getTrackMap } from '../state/trackMapStore';
+import { getTrackMap } from '../stores/TrackMapStore';
 import type { TrackMap } from '../types/track';
-import { handleTrackClick } from './handleTrackClick';
+import { handleTrackClick } from '../logic/handleTrackClick';
 
 export function renderTrackIcons(
     container: HTMLElement,
     image: HTMLImageElement,
-    generateButton: HTMLButtonElement,
-    selectedTrackStore: HTMLElement
 ) {
     const scaleX = image.offsetWidth / image.naturalWidth;
     const scaleY = image.offsetHeight / image.naturalHeight;
@@ -32,8 +30,9 @@ export function renderTrackIcons(
         icon.style.left = `${track.coords.X * scaleX - halfSize}px`;
         icon.style.top = `${track.coords.Y * scaleY - halfSize}px`;
 
+        // listen to clicks to see if that icon was clicked (or not!)
         icon.addEventListener('click', () => {
-            const result = handleTrackClick(icon, track, selectedIcon, trackSelectedText, selectedTrackStore, generateButton);
+            const result = handleTrackClick(icon, track, selectedIcon, trackSelectedText);
             selectedIcon = result.newSelectedIcon;
         });
 
