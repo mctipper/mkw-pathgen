@@ -14,7 +14,7 @@ export function updateTrackSelection(
     const isSelected = !!track;
 
     // lots of 'resetting' or setting values based on the click
-    trackSelected.innerHTML = isSelected ? track!.names.en_gb : 'Select a track!';
+    trackSelected.innerHTML = isSelected ? `< ${track!.names.en_gb} >` : 'Select a track!';
     trackSelected.classList.toggle('track-selected-title-text', isSelected);
     setSelectedTrack(track);
     resetPathLines();
