@@ -27,6 +27,7 @@ export function scaleCircle(mapImg: HTMLImageElement): number {
     return mapImg.height / 15;
 }
 
+export async function renderPathLines(path: string[]) {
     // invalidate previous (if any)
     const drawId = ++currentDrawId;
     const svg = document.querySelector('.path-lines-layer') as SVGSVGElement;
