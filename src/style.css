@@ -107,6 +107,7 @@ header {
 }
 
 .selected-track-text.track-selected-title-text {
+  font-family: 'Trebuchet MS', monospace;
   font-size: 2rem;
   font-weight: bold;
   font-style: italic;
