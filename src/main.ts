@@ -42,7 +42,7 @@ async function init() {
     selectedTrackEndCheck,
     includeSingleTrackCheck,
   } = refs as {
-    trackMapStore: HTMLElement
+    trackMapStore: HTMLElement;
     trackIconLayer: HTMLElement;
     mapImg: HTMLImageElement;
     pathGenControls: HTMLImageElement;
