@@ -18,7 +18,9 @@ export function renderTrackIcons(
     const trackSelectedText = document.querySelector<HTMLElement>('.selected-track-text')!;
     let selectedIcon: HTMLImageElement | null = null;
 
-    for (const track of Object.values(tracks)) {
+    const trackMap: TrackMap = getTrackMap();
+
+    for (const track of Object.values(trackMap)) {
         const icon = document.createElement('img');
         icon.src = `${import.meta.env.BASE_URL}images/track-icons/${track.icon}`;
         icon.alt = track.names.en_gb;

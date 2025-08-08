@@ -1,16 +1,16 @@
 import './style.css';
 import { syncElementToImage, syncElementWidthToImage } from './ui/syncToBase';
-import { loadTracks } from './data/tracks';
 import { renderTrackIcons } from './ui/renderTrackIcons';
 
-import type { TrackMap } from './types/track';
 import { handleGenerateButtonClick } from './ui/handleGenerateButtonClick';
 import { updateSingleTrackCheckboxState } from './ui/handleDropdownSelect';
+import { initTrackMapStore } from './state/trackMapStore';
 
 
 async function init() {
   // validate that all require DOM layers have loaded
   const refs = {
+    trackMapStore: document.querySelector<HTMLElement>('#track-map-store'),
     selectedTrackStore: document.querySelector<HTMLElement>('#selected-track-store'),
     trackIconLayer: document.querySelector<HTMLElement>('.track-icons-layer'),
     mapImg: document.querySelector<HTMLImageElement>('.base-map'),
@@ -33,6 +33,7 @@ async function init() {
 
   // allow to pass the same elements to each listener
   const {
+    trackMapStore,
     selectedTrackStore,
     trackIconLayer,
     mapImg,
@@ -42,6 +43,7 @@ async function init() {
     selectedTrackEnd,
     includeSingleTrackCheck,
   } = refs as {
+    trackMapStore: HTMLElement
     selectedTrackStore: HTMLElement;
     trackIconLayer: HTMLElement;
     mapImg: HTMLImageElement;
