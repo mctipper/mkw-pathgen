@@ -2,7 +2,7 @@ import { setSelectedTrack } from '../stores/SelectedTrackStore';
 import { getAllTrackIcons } from '../ui/getAllTrackIcons';
 import type { Track } from '../types/track';
 import { disableGenerateButton, enableGenerateButton } from './toggleGenerateButton';
-import { resetPathIcons, resetPathLines } from './drawPathLines'
+import { resetPathLines } from './drawPathLines'
 
 export function updateTrackSelection(
     icon: HTMLImageElement,
@@ -17,7 +17,6 @@ export function updateTrackSelection(
     trackSelected.innerHTML = isSelected ? track!.names.en_gb : 'Select a track!';
     trackSelected.classList.toggle('track-selected-title-text', isSelected);
     setSelectedTrack(track);
-    resetPathIcons([]);
     resetPathLines();
     isSelected ? enableGenerateButton() : disableGenerateButton();
 

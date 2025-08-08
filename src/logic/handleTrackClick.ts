@@ -1,5 +1,7 @@
 import { updateTrackSelection } from '../ui/updateTrackSelection';
 import type { Track } from '../types/track';
+import { resetPathLines } from '../ui/drawPathLines';
+import { resetPathResultsList } from '../ui/renderPathResultsList';
 
 export function handleTrackClick(
     icon: HTMLImageElement,
@@ -10,6 +12,9 @@ export function handleTrackClick(
     newSelectedIcon: HTMLImageElement | null;
     newSelectedTrack: Track | null;
 } {
+    resetPathLines(); // reset draw
+    resetPathResultsList(); // reset path list
+
     if (selectedIcon && selectedIcon !== icon) {
         selectedIcon.classList.remove('iconSelected');
     }
