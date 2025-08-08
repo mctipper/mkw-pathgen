@@ -9,7 +9,8 @@ export function generateGrandPrix(
     const direction = endWithSelected ? 'backward' : 'forward';
     const dfsPathLength = 4;
     const includeRepeat = false;
-    let path = dfsTraversal(trackMap, selectedId, direction, dfsPathLength, includeRepeat);
+    const allowRevisit = false;
+    let path = dfsTraversal(trackMap, selectedId, direction, dfsPathLength, includeRepeat, allowRevisit);
     console.debug(`First: ${path}`)
 
     if (endWithSelected) path = path.reverse();

@@ -1,40 +1,55 @@
 import type { TrackMap } from '../types/track';
 import { shuffle } from './shuffleHelper';
 
+
+
+
+
 export function dfsTraversal(
     trackMap: TrackMap,
     startId: string,
     direction: 'forward' | 'backward',
     maxLength: number,
-    includeRepeat: boolean = false
+    includeRepeat: boolean = false,
+    allowRevisit: boolean = false
 ): string[] {
-    const visited = new Set<string>();
     const path: string[] = [];
-
-    const addTrack = (id: string) => {
-        if (!visited.has(id)) {
-            path.push(id);
-            visited.add(id);
-        } else if (includeRepeat && path[path.length - 1] !== id) {
-            // specifically for vs* mode, allow one 'repeat' which will be translated as a single-track race
-            path.push(id);
-        }
-    };
+    const visitedTracks = new Set<string>();
+    const visitedLinks = new Set<string>();
 
     // simple dfs traversal
     const traverse = (currentId: string) => {
         if (path.length >= maxLength) return;
 
+        path.push(currentId)
+
         const track = trackMap[currentId];
         if (!track) return;
 
-        addTrack(currentId);
+        // allow for 'end with selected' checkbox option, and also allowRepeat add the current track to the mix
+        const children = includeRepeat ? [...track.children, track.id] : track.children;
+        const parents = includeRepeat ? [...track.parents, track.id] : track.parents;
+        const nextIds = direction === 'forward' ? shuffle(children) : shuffle(parents);
+        console.debug(currentId, nextIds)
 
-        // allow for 'end with selected' checkbox option
-        const nextIds = direction === 'forward' ? shuffle(track.children) : shuffle(track.parents);
         for (const nextId of nextIds) {
+            // path found at correct length
             if (path.length >= maxLength) break;
-            // recursion in the browser...
+
+            // no 'u-turns'
+            if (path.length >= 2 && path[path.length - 2] === nextId) continue;
+
+            // determine if next track already visited (if revist denied)
+            if (!allowRevisit && visitedTracks.has(nextId)) continue;
+
+            // determine if next path traversed already 
+            // (also prevents multiple single-track events of the same track)
+            const linkKey = `${currentId}->${nextId}`;
+            if (visitedLinks.has(linkKey)) continue;
+
+            // new traversal found, give it a go
+            visitedTracks.add(nextId);
+            visitedLinks.add(linkKey);
             traverse(nextId);
         }
     };
