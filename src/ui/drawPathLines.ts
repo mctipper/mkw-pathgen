@@ -1,5 +1,8 @@
 import { getAllTrackIcons } from "./getAllTrackIcons";
 
+// global draw gen id
+let currentDrawId = 0;
+
 export function resetPathIcons(path: string[]) {
     // remove previous
     let allIcons = getAllTrackIcons();
@@ -21,8 +24,13 @@ export function resetPathLines() {
 }
 
 export async function drawPathLines(path: string[]) {
+    // invalidate previous (if any)
+    const drawId = ++currentDrawId;
     const svg = document.querySelector('.path-lines-layer') as SVGSVGElement;
     if (!svg) return;
+
+    const mapImg = document.querySelector<HTMLImageElement>('.base-map')
+    if (!mapImg) return;
 
     // reset all previous
     resetPathLines();
@@ -38,10 +46,13 @@ export async function drawPathLines(path: string[]) {
         ];
     };
 
+    const isCancelled = () => drawId !== currentDrawId;
+
     const animateLine = async (
         x1: number, y1: number, x2: number, y2: number,
         stroke: string, width: string, dashArray?: string
     ) => {
+        if (isCancelled()) return;
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         const d = `M ${x1} ${y1} L ${x2} ${y2}`;
         path.setAttribute('d', d);
@@ -68,6 +79,7 @@ export async function drawPathLines(path: string[]) {
     };
 
     const animateCircleOverlay = async (x: number, y: number) => {
+        if (isCancelled()) return;
 
         const radius = mapImg.height / 15;
 
@@ -104,6 +116,7 @@ export async function drawPathLines(path: string[]) {
 
         // looks better on the circles
         const animateFadeIn = async (circle: SVGCircleElement) => {
+            if (isCancelled()) return;
             svg.appendChild(circle);
             const animation = circle.animate([
                 { opacity: 0 },
@@ -130,6 +143,7 @@ export async function drawPathLines(path: string[]) {
 
     // main loop to draw the path links
     for (let i = 0; i < path.length - 1; i++) {
+        if (isCancelled()) return;
         const fromEl = document.getElementById(path[i]);
         const toEl = document.getElementById(path[i + 1]);
         if (!fromEl || !toEl) continue;
