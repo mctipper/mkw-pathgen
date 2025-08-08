@@ -2,9 +2,6 @@ import type { TrackMap } from '../types/track';
 import { shuffle } from './shuffleHelper';
 
 
-
-
-
 export function dfsTraversal(
     trackMap: TrackMap,
     startId: string,
