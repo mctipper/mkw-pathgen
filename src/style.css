@@ -95,13 +95,13 @@ header {
   margin-top: 10px;
 }
 
-.selected-track {
+.selected-track-text {
   font-weight: bold;
   font-size: 1rem;
   transition: all 0.2s ease;
 }
 
-.selected-track.track-selected {
+.selected-track-text.track-selected-title-text {
   font-size: 2rem;
   font-weight: bold;
   font-style: italic;

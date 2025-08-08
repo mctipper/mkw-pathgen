@@ -15,9 +15,7 @@ export function renderTrackIcons(
     const iconSize = image.height / 8;
     const halfSize = iconSize / 2;
 
-    const trackSelected = document.querySelector<HTMLElement>('.selected-track')!;
-    const store = document.getElementById('selected-track-store')!;
-
+    const trackSelectedText = document.querySelector<HTMLElement>('.selected-track-text')!;
     let selectedIcon: HTMLImageElement | null = null;
 
     for (const track of Object.values(tracks)) {
