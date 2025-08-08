@@ -111,8 +111,7 @@ header {
   font-size: 2rem;
   font-weight: bold;
   font-style: italic;
-  color: #2c90f0;
-  text-shadow: 0 0 2px rgba(44, 144, 240, 0.5);
+  color: white;
 }
 
 .path-options-dropdown {
