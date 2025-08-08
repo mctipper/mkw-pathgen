@@ -1,7 +1,8 @@
 import { getTrackMap } from '../stores/TrackMapStore';
 import type { TrackMap } from '../types/track';
 import { handleTrackClick } from '../logic/handleTrackClick';
-import { resetPathLines, resetPathIcons } from './drawPathLines';
+import { resetPathResultsList } from './renderPathResultsList';
+import { resetPathLines } from './drawPathLines';
 
 export function renderTrackIcons(
     container: HTMLElement,
@@ -22,7 +23,7 @@ export function renderTrackIcons(
 
     // reset all previous
     resetPathLines();
-    resetPathIcons([]);
+    resetPathResultsList();
 
     for (const track of Object.values(trackMap)) {
         const icon = document.createElement('img');

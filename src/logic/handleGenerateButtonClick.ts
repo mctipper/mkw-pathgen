@@ -4,6 +4,7 @@ import { generateGrandPrix } from '../pathgen/grandprix';
 import { generateKnockoutTour } from '../pathgen/knockouttour';
 import { generateVSMode } from '../pathgen/vs';
 import { drawPathLines } from '../ui/drawPathLines';
+import { renderPathResultsList } from '../ui/renderPathResultsList';
 
 
 export function handleGenerateButtonClick(pathModeSelect: HTMLSelectElement, selectedTrackEnd: HTMLInputElement, includeSingleTrackCheck: HTMLInputElement) {
@@ -41,6 +42,10 @@ export function handleGenerateButtonClick(pathModeSelect: HTMLSelectElement, sel
 
     console.log(path);
 
+    // populate the list
+    renderPathResultsList(path);
+
     // draw the path on the map
     drawPathLines(path);
+
 }
