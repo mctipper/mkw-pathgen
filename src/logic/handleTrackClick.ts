@@ -1,6 +1,6 @@
 import { updateTrackSelection } from '../ui/updateTrackSelection';
 import type { Track } from '../types/track';
-import { resetPathLines } from '../ui/drawPathLines';
+import { resetPathLines } from '../ui/renderPathLines';
 import { resetPathResultsList } from '../ui/renderPathResultsList';
 
 export function handleTrackClick(

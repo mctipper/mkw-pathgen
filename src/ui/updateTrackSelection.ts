@@ -2,7 +2,7 @@ import { setSelectedTrack } from '../stores/SelectedTrackStore';
 import { getAllTrackIcons } from '../ui/getAllTrackIcons';
 import type { Track } from '../types/track';
 import { disableGenerateButton, enableGenerateButton } from './toggleGenerateButton';
-import { resetPathLines } from './drawPathLines'
+import { resetPathLines } from './renderPathLines'
 
 export function updateTrackSelection(
     icon: HTMLImageElement,

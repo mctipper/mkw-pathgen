@@ -3,7 +3,7 @@ import { getTrackMap } from '../stores/TrackMapStore';
 import { generateGrandPrix } from '../pathgen/grandprix';
 import { generateKnockoutTour } from '../pathgen/knockouttour';
 import { generateVSMode } from '../pathgen/vs';
-import { drawPathLines } from '../ui/drawPathLines';
+import { renderPathLines } from '../ui/renderPathLines';
 import { renderPathResultsList } from '../ui/renderPathResultsList';
 
 
@@ -46,6 +46,6 @@ export function handleGenerateButtonClick(pathModeSelect: HTMLSelectElement, sel
     renderPathResultsList(path);
 
     // draw the path on the map
-    drawPathLines(path);
+    renderPathLines(path);
 
 }

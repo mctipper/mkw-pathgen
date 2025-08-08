@@ -19,11 +19,11 @@ export function resetPathIcons(path: string[]) {
 }
 
 export function resetPathLines() {
-    // just call drawPathLines with an empty array to reset AND interupt
-    drawPathLines([]);
+    // just call renderPathLines with an empty array to reset AND interupt
+    renderPathLines([]);
 }
 
-export async function drawPathLines(path: string[]) {
+export async function renderPathLines(path: string[]) {
     // invalidate previous (if any)
     const drawId = ++currentDrawId;
     const svg = document.querySelector('.path-lines-layer') as SVGSVGElement;
