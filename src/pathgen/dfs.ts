@@ -1,7 +1,6 @@
 import type { TrackMap } from '../types/track';
 import { shuffle } from './shuffleHelper';
 
-
 export function dfsTraversal(
     trackMap: TrackMap,
     startId: string,
@@ -13,49 +12,93 @@ export function dfsTraversal(
     const path: string[] = [];
     const visitedTracks = new Set<string>();
     const visitedLinks = new Set<string>();
+    // allow one repeat per track only, multi-path trap
+    const usedRepeat = new Set<string>();
 
     // simple dfs traversal
-    const traverse = (currentId: string) => {
-        if (path.length >= maxLength) return;
+    const traverse = (currentId: string): boolean => {
+        if (path.length >= maxLength) return true;
 
-        path.push(currentId)
+        path.push(currentId);
 
         const track = trackMap[currentId];
-        if (!track) return;
+        if (!track) {
+            // early backtrack tarp
+            path.pop();
+            return false;
+        };
 
         // allow for 'end with selected' checkbox option, and also allowRepeat add the current track to the mix
         const children = includeRepeat ? [...track.children, track.id] : track.children;
         const parents = includeRepeat ? [...track.parents, track.id] : track.parents;
         const nextIds = direction === 'forward' ? shuffle(children) : shuffle(parents);
-        console.debug(currentId, nextIds)
+        console.debug(currentId, nextIds);
 
+        // prevent greedy algo, validate the nextIds
+        let validatedIds: string[] = [];
         for (const nextId of nextIds) {
-            // path found at correct length
-            if (path.length >= maxLength) break;
+            const isRepeat = nextId === currentId;
 
             // no 'u-turns'
             if (path.length >= 2 && path[path.length - 2] === nextId) continue;
 
-            // determine if next track already visited (if revist denied)
-            if (!allowRevisit && visitedTracks.has(nextId)) continue;
+            // determine if next track already visited (if revisit denied)
+            if (!allowRevisit && visitedTracks.has(nextId) && !isRepeat) continue;
 
             // determine if next path traversed already 
             // (also prevents multiple single-track events of the same track)
-            const linkKey = `${currentId}->${nextId}`;
+            const nextLinkKey = `${currentId}->${nextId}`;
             // const linkKeyRev = `${nextId}->${currentId}`; // include 'other direction'
-            if (visitedLinks.has(linkKey)) continue;
+            if (visitedLinks.has(nextLinkKey)) continue;
             // if (visitedLinks.has(linkKeyRev)) continue;
 
-            // new traversal found, give it a go
-            visitedTracks.add(nextId);
-            visitedLinks.add(linkKey);
-            // visitedLinks.add(linkKeyRev);
-            traverse(nextId);
+            // allow one repeat only
+            if (isRepeat && usedRepeat.has(currentId)) continue;
+
+            // passes screening
+            validatedIds.push(nextId);
         }
+
+        if (validatedIds.length === 0) {
+            // nowhere valid to go
+            path.pop();
+            return false;
+        }
+
+        for (const validatedId of validatedIds) {
+            const isRepeat = validatedId === currentId;
+
+            // new traversal found, give it a go
+            if (isRepeat) {
+                usedRepeat.add(currentId);
+            } else {
+                visitedTracks.add(validatedId);
+            }
+
+            const validatedLinkKey = `${currentId}->${validatedId}`;
+            // const validatedLinkKeyRev = `${validatedId}->${currentId}`;
+            visitedLinks.add(validatedLinkKey);
+            // visitedLinks.add(validatedLinkKeyRev);
+
+            const success = traverse(validatedId);
+            if (success) return true;
+
+            // backtrack if child traversal failed, these links and nodes may be
+            // valid elsewhere in the traversal, so remove them as 'visited' for now
+            visitedLinks.delete(validatedLinkKey);
+            if (isRepeat) {
+                usedRepeat.delete(currentId);
+            } else {
+                visitedTracks.delete(validatedId);
+            }
+        }
+
+        path.pop();
+        return false;
     };
 
     // kick it off
     traverse(startId);
 
-    return path.slice(0, maxLength);
+    return path;
 }
