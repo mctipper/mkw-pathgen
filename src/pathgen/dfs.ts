@@ -32,7 +32,7 @@ export function dfsTraversal(
         const children = includeRepeat ? [...track.children, track.id] : track.children;
         const parents = includeRepeat ? [...track.parents, track.id] : track.parents;
         const nextIds = direction === 'forward' ? shuffle(children) : shuffle(parents);
-        console.debug(currentId, nextIds);
+        console.debug('raw next:', currentId, nextIds);
 
         // prevent greedy algo, validate the nextIds
         let validatedIds: string[] = [];
@@ -58,6 +58,8 @@ export function dfsTraversal(
             // passes screening
             validatedIds.push(nextId);
         }
+
+        console.debug('validated:', currentId, validatedIds);
 
         if (validatedIds.length === 0) {
             // nowhere valid to go
