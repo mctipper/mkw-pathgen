@@ -3,7 +3,7 @@
 ![Typescript 5.8.3](https://img.shields.io/badge/Typescript-5.8.3-3178C6)
 ![Vite 7.0.4](https://img.shields.io/badge/Vite-7.0.4-7F00FF)
 
-Generate random cups, rallies, vs-mode (of all lengths) paths. Just for shits and gigs, a fun excuse to play with DFS traversal and building a spiffy little website for no particular reason.
+Generate random cups, rallies, vs-mode (of all lengths) paths. Just for shits and gigs, a fun excuse to play with DFS traversal and building a spiffy little website for no particular reason. Wanted to 'keep it vanilla' but yeh went with Vite because it just makes basics so easy, and TS because I just prefer types really.
 
 Select a track by clicking its icon, then generate a path using the options provided and clicking the 'Generate Path' button. Will do a DFS traversal and return a path, by drawing it crudely on the map and also as a list below.
 
@@ -37,9 +37,8 @@ The caveats as mentioned are either universal or specific to the mode selected.
 
 If a path cannot be found (ie. starting from Rainbow Road), an empty path is returned and a little message displayed just to inform. The number of permutations is in the millions so being unable to find a path is almost zero% chance of occuring otherwise.
 
-## TODO
+## Future Enhancements
 
-- remove the passing around of the elements between methods. Once they have been confirmed loaded its safe to `querySelector` them when needed; will just make the code tidier really (althought its not that bad really)
 - would like to get % breakdowns of each track/intermissions (with ranges for path branching) so can return the % of road coverage for the returned path.
 - some colour (monochrome) rendering on the map based on the resutling path remaining 'colour' and the rest going black and white
 - with the drawing animation, make the icons increase in size _as each path arrives at that track_
@@ -47,10 +46,11 @@ If a path cannot be found (ie. starting from Rainbow Road), an empty path is ret
 - fix up that dashed line animation yucks
 - generate a list of 00s of 'mario themed' items and give a random name to each generated path ('Poison Mushroom Cup' / 'Goomba Shoe Rally' etc...). Maybe use the % breakdown of track covered (dot-point-1) to 'guide' these so have 'ice' themed or 'lava' themed names have greater chance of being used if >x% of the track is lava etc...
 - the dreaded post-completion refactor: some of the modules are serving multiple purposes so should tidy that up, and give future self a hand and comment it out better. Some unit tests would have been a good idea.
+- remove the passing around of the elements between methods. Once they have been confirmed loaded its safe to `querySelector` them when needed; will just make the code tidier really (althought its not that bad really)
 
 ## Setup
 
-Build with `vite` and `TS`, I haven't bothered with dev or prod builds or any of that guff as this is a side-proj nothing more. Versions are above in the fancy badge things. `npm install` to build the little node env, then `npm run dev` to get it up and running. There is also a `devcontainer` set up already to make it easier because isolation just makes everything better.
+Build with `vite` and `TS`, I haven't bothered with dev or prod builds or any of that guff as this is a side-proj nothing more. Wanted to push framework-less webdev ideas a bit. Versions are above in the fancy badge things. `npm install` to build the little node env, then `npm run dev` to get it up and running. There is also a `devcontainer` set up already to make it easier because isolation just makes everything better.
 
 ## Credits
 
