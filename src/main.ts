@@ -1,5 +1,5 @@
 import './style.css';
-import { syncElementToImage, syncElementWidthToImage } from './ui/syncToBase';
+import { syncElementToImage, syncElementWidthToImage, syncIconsToImage } from './ui/syncToBase';
 import { renderTrackIcons } from './ui/renderTrackIcons';
 import { disableGenerateButton } from './ui/toggleGenerateButton';
 import { handleGenerateButtonClick } from './logic/handleGenerateButtonClick';
@@ -69,20 +69,27 @@ async function init() {
     updateSingleTrackCheckboxState(pathModeSelect.value, includeSingleTrackCheck)
   );
 
-  // syncing to base image size
-  function render() {
+  // sync to base image size
+  function sync() {
     syncElementToImage(trackIconLayer, mapImg);
     syncElementWidthToImage(pathGenControls, mapImg);
-    renderTrackIcons(trackIconLayer, mapImg);
+    syncIconsToImage(mapImg);
   }
 
-  // upon load or resize
+
+  // render the icons first then sync
+  function render() {
+    renderTrackIcons(trackIconLayer, mapImg)
+    sync();
+  }
+
+  // render upon map load, then sync upon resize
   if (mapImg.complete) {
     render();
   } else {
     mapImg.addEventListener('load', render);
   }
-  window.addEventListener('resize', render);
+  window.addEventListener('resize', sync);
 }
 
 init();

@@ -4,15 +4,27 @@ import { handleTrackClick } from '../logic/handleTrackClick';
 // import { resetPathResultsList } from './renderPathResultsList';
 // import { resetPathLines } from './renderPathLines';
 
+export function updateIconPosition(icon: HTMLImageElement,
+    iconSize: number,
+    halfSize: number,
+    scaleX: number,
+    scaleY: number
+) {
+    const trackMap: TrackMap = getTrackMap();
+    const track = trackMap[icon.id]
+    icon.style.width = `${iconSize}px`;
+    icon.style.height = `${iconSize}px`;
+    icon.style.left = `${track.coords.X * scaleX - halfSize}px`;
+    icon.style.top = `${track.coords.Y * scaleY - halfSize}px`;
+}
+
+
 export function renderTrackIcons(
     container: HTMLElement,
     image: HTMLImageElement,
 ) {
     const scaleX = image.offsetWidth / image.naturalWidth;
     const scaleY = image.offsetHeight / image.naturalHeight;
-
-    container.innerHTML = '';
-
     const iconSize = image.height / 8;
     const halfSize = iconSize / 2;
 
@@ -20,6 +32,7 @@ export function renderTrackIcons(
     let selectedIcon: HTMLImageElement | null = null;
 
     const trackMap: TrackMap = getTrackMap();
+    container.innerHTML = '';
 
     // reset all previous
     // decided to remove this as mobile scrolling triggers "resize" when address bar is removed.
@@ -34,10 +47,11 @@ export function renderTrackIcons(
         icon.src = `${import.meta.env.BASE_URL}images/track-icons/${track.icon}`;
         icon.alt = track.names.en_gb;
         icon.style.position = 'absolute';
-        icon.style.width = `${iconSize}px`;
-        icon.style.height = `${iconSize}px`;
-        icon.style.left = `${track.coords.X * scaleX - halfSize}px`;
-        icon.style.top = `${track.coords.Y * scaleY - halfSize}px`;
+        // icon.style.width = `${iconSize}px`;
+        // icon.style.height = `${iconSize}px`;
+        // icon.style.left = `${track.coords.X * scaleX - halfSize}px`;
+        // icon.style.top = `${track.coords.Y * scaleY - halfSize}px`;
+        updateIconPosition(icon, iconSize, halfSize, scaleX, scaleY);
 
         // listen to clicks to see if that icon was clicked (or not!)
         icon.addEventListener('click', () => {
