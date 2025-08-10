@@ -1,5 +1,6 @@
 import type { TrackMap } from '../types/track';
 import { shuffle } from './shuffleHelper';
+import { debugLog } from '../utils/log';
 
 export function dfsTraversal(
     trackMap: TrackMap,
@@ -19,6 +20,7 @@ export function dfsTraversal(
     const traverse = (currentId: string): boolean => {
         if (path.length >= maxLength) return true;
 
+        debugLog(`Traversing from: ${currentId}`)
         path.push(currentId);
 
         const track = trackMap[currentId];
@@ -32,7 +34,7 @@ export function dfsTraversal(
         const children = includeRepeat ? [...track.children, track.id] : track.children;
         const parents = includeRepeat ? [...track.parents, track.id] : track.parents;
         const nextIds = direction === 'forward' ? shuffle(children) : shuffle(parents);
-        console.debug('raw next:', currentId, nextIds);
+        debugLog('raw neighbours:', currentId, nextIds);
 
         // prevent greedy algo, validate the nextIds
         let validatedIds: string[] = [];
@@ -40,29 +42,42 @@ export function dfsTraversal(
             const isRepeat = nextId === currentId;
 
             // no 'u-turns'
-            if (path.length >= 2 && path[path.length - 2] === nextId) continue;
+            if (path.length >= 2 && path[path.length - 2] === nextId) {
+                debugLog(`Uturn prevented from ${currentId} back to ${nextId}`)
+                continue;
+            };
 
             // determine if next track already visited (if revisit denied)
-            if (!allowRevisit && visitedTracks.has(nextId) && !isRepeat) continue;
+            if (!allowRevisit && visitedTracks.has(nextId) && !isRepeat) {
+                debugLog(`Revisited of ${nextId} prevented`)
+                continue;
+            }
 
             // determine if next path traversed already 
             // (also prevents multiple single-track events of the same track)
             const nextLinkKey = `${currentId}->${nextId}`;
             // const linkKeyRev = `${nextId}->${currentId}`; // include 'other direction'
-            if (visitedLinks.has(nextLinkKey)) continue;
+            if (visitedLinks.has(nextLinkKey)) {
+                debugLog(`Retracing link ${nextLinkKey} prevented`)
+                continue;
+            }
             // if (visitedLinks.has(linkKeyRev)) continue;
 
             // allow one repeat only
-            if (isRepeat && usedRepeat.has(currentId)) continue;
+            if (isRepeat && usedRepeat.has(currentId)) {
+                debugLog(`Dual repeat of ${currentId} prevented`)
+                continue;
+            }
 
             // passes screening
             validatedIds.push(nextId);
         }
 
-        console.debug('validated:', currentId, validatedIds);
+        debugLog('validated neighbours:', currentId, validatedIds);
 
         if (validatedIds.length === 0) {
             // nowhere valid to go
+            debugLog('No valid neighbours: backtracking')
             path.pop();
             return false;
         }
@@ -83,7 +98,9 @@ export function dfsTraversal(
             // visitedLinks.add(validatedLinkKeyRev);
 
             const success = traverse(validatedId);
-            if (success) return true;
+            if (success) {
+                return true;
+            }
 
             // backtrack if child traversal failed, these links and nodes may be
             // valid elsewhere in the traversal, so remove them as 'visited' for now
