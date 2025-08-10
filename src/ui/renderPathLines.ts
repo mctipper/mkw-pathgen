@@ -52,100 +52,102 @@ export async function renderPathLines(path: string[]) {
 
     const isCancelled = () => drawId !== currentDrawId;
 
-    const animateLine = async (
-        x1: number, y1: number, x2: number, y2: number,
-        stroke: string, width: string, dashArray?: string
-    ) => {
-        if (isCancelled()) return;
-        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        const d = `M ${x1} ${y1} L ${x2} ${y2}`;
-        path.setAttribute('d', d);
-        path.setAttribute('stroke', stroke);
-        path.setAttribute('stroke-width', width);
-        path.setAttribute('fill', 'none');
-        path.setAttribute('stroke-linecap', 'round');
-        if (dashArray) path.setAttribute('stroke-dasharray', dashArray);
+    const animateStrokeReveal = async (el: SVGGeometryElement, fallbackLength: number) => {
+        const dashArray = el.getAttribute('stroke-dasharray');
+        const length = dashArray ?? fallbackLength.toString();
 
-        const length = path.getTotalLength();
-        path.setAttribute('stroke-dasharray', dashArray ?? length.toString());
-        path.setAttribute('stroke-dashoffset', length.toString());
+        el.setAttribute('stroke-dasharray', length);
+        el.setAttribute('stroke-dashoffset', length);
 
-        svg.appendChild(path);
+        svg.appendChild(el);
 
-        return path.animate([
-            { strokeDashoffset: length },
+        const animation = el.animate([
+            { strokeDashoffset: parseFloat(length) },
             { strokeDashoffset: 0 }
         ], {
             duration: 500,
             easing: 'ease-out',
             fill: 'forwards'
-        }).finished;
+        });
+
+        return animation.finished;
     };
 
-    const animateCircleOverlay = async (x: number, y: number) => {
+    const drawLineInstant = (
+        x1: number, y1: number, x2: number, y2: number,
+        stroke: string, width: string, opacity: string
+    ) => {
         if (isCancelled()) return;
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', `M ${x1} ${y1} L ${x2} ${y2}`);
+        path.setAttribute('stroke', stroke);
+        path.setAttribute('stroke-width', width);
+        path.setAttribute('opacity', opacity);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke-linecap', 'round');
+        svg.appendChild(path);
+    };
 
+    const createAnimatedLine = (
+        x1: number, y1: number, x2: number, y2: number,
+        stroke: string, width: string, dashArray?: string
+    ): SVGPathElement => {
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', `M ${x1} ${y1} L ${x2} ${y2}`);
+        path.setAttribute('stroke', stroke);
+        path.setAttribute('stroke-width', width);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke-linecap', 'round');
+        if (dashArray) path.setAttribute('stroke-dasharray', dashArray);
+        return path;
+    };
+
+    const createAnimatedCircle = (
+        x: number, y: number,
+        stroke: string, width: number, dashArray?: string
+    ): SVGCircleElement => {
         const radius = mapImg.height / 15;
-
-        const createCircle = (stroke: string, width: number, dash?: string, opacity?: number): SVGCircleElement => {
-            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            circle.setAttribute('cx', x.toString());
-            circle.setAttribute('cy', y.toString());
-            circle.setAttribute('r', radius.toString());
-            circle.setAttribute('stroke', stroke);
-            circle.setAttribute('stroke-width', width.toString());
-            circle.setAttribute('fill', 'none');
-            if (dash) circle.setAttribute('stroke-dasharray', dash);
-            if (opacity !== undefined) circle.style.opacity = opacity.toString();
-            return circle;
-        };
-
-        const animateStrokeReveal = async (circle: SVGCircleElement) => {
-            const circumference = 2 * Math.PI * radius;
-            circle.setAttribute('stroke-dasharray', circumference.toString());
-            circle.setAttribute('stroke-dashoffset', circumference.toString());
-            svg.appendChild(circle);
-
-            const animation = circle.animate([
-                { strokeDashoffset: circumference },
-                { strokeDashoffset: 0 }
-            ], {
-                duration: 500,
-                easing: 'ease-out',
-                fill: 'forwards'
-            });
-
-            return animation.finished;
-        };
-
-        // looks better on the circles
-        const animateFadeIn = async (circle: SVGCircleElement) => {
-            if (isCancelled()) return;
-            svg.appendChild(circle);
-            const animation = circle.animate([
-                { opacity: 0 },
-                { opacity: 1 }
-            ], {
-                duration: 500,
-                easing: 'ease-out',
-                fill: 'forwards'
-            });
-
-            return animation.finished;
-        };
-
-        const thickBlack = createCircle('black', 16);
-        const white = createCircle('white', 10);
-        const dashedBlack = createCircle('black', 2, '6,4', 0);
-
-        await Promise.all([
-            animateStrokeReveal(thickBlack),
-            animateStrokeReveal(white)
-        ]);
-        await animateFadeIn(dashedBlack);
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', x.toString());
+        circle.setAttribute('cy', y.toString());
+        circle.setAttribute('r', radius.toString());
+        circle.setAttribute('stroke', stroke);
+        circle.setAttribute('stroke-width', width.toString());
+        circle.setAttribute('fill', 'none');
+        if (dashArray) circle.setAttribute('stroke-dasharray', dashArray);
+        return circle;
     };
 
     // main loop to draw the path links
+
+    // draw all solid black lines instantly
+    const solidLineOpacity: string = '0.5';
+    for (let i = 0; i < path.length - 1; i++) {
+        if (isCancelled()) return;
+        const fromEl = document.getElementById(path[i]);
+        const toEl = document.getElementById(path[i + 1]);
+        if (!fromEl || !toEl) continue;
+
+        const [x1, y1] = getCenter(fromEl);
+        const [x2, y2] = getCenter(toEl);
+
+        if (path[i] === path[i + 1]) {
+            const radius = mapImg.height / 15;
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('cx', x1.toString());
+            circle.setAttribute('cy', y1.toString());
+            circle.setAttribute('r', radius.toString());
+            circle.setAttribute('stroke', 'black');
+            circle.setAttribute('stroke-width', '16');
+            circle.setAttribute('fill', 'none');
+            circle.setAttribute('opacity', solidLineOpacity);
+            svg.appendChild(circle);
+        } else {
+            drawLineInstant(x1, y1, x2, y2, 'black', '16', solidLineOpacity);
+        }
+    }
+
+    // animate white and dashed black lines sequentially
     for (let i = 0; i < path.length - 1; i++) {
         if (isCancelled()) return;
         const fromEl = document.getElementById(path[i]);
@@ -157,14 +159,25 @@ export async function renderPathLines(path: string[]) {
 
         if (path[i] === path[i + 1]) {
             // single-track, draw a circle
-            await animateCircleOverlay(x1, y1);
+            const white = createAnimatedCircle(x1, y1, 'white', 10);
+            const dashed = createAnimatedCircle(x1, y1, 'black', 2, '6,4');
+            const radius = mapImg.height / 15;
+            const length = 2 * Math.PI * radius;
+
+            await Promise.all([
+                animateStrokeReveal(white, length),
+                animateStrokeReveal(dashed, length)
+            ]);
         } else {
             // intermission, draw the link
+            const white = createAnimatedLine(x1, y1, x2, y2, 'white', '10');
+            const dashed = createAnimatedLine(x1, y1, x2, y2, 'black', '2', '6,4');
+            const length = white.getTotalLength();
+
             await Promise.all([
-                animateLine(x1, y1, x2, y2, 'black', '16'),
-                animateLine(x1, y1, x2, y2, 'white', '10')
+                animateStrokeReveal(white, length),
+                animateStrokeReveal(dashed, length)
             ]);
-            await animateLine(x1, y1, x2, y2, 'black', '2', '6,4');
         }
     }
 }
