@@ -54,6 +54,7 @@ header {
   transition: transform 0.2s ease;
   transform-origin: center center;
   z-index: 10;
+  filter: drop-shadow(2px 6px 0 rgba(0, 0, 0, 0.6));
 }
 
 .track-icon:hover {
