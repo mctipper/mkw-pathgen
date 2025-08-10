@@ -121,7 +121,7 @@ export async function renderPathLines(path: string[]) {
     // main loop to draw the path links
 
     // draw all solid black lines instantly
-    const solidLineOpacity: string = '0.5';
+    const solidLineOpacity: string = '0.8';
     for (let i = 0; i < path.length - 1; i++) {
         if (isCancelled()) return;
         const fromEl = document.getElementById(path[i]);
