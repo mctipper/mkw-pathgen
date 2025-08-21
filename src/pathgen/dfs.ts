@@ -53,6 +53,15 @@ export function dfsTraversal(
                 continue;
             }
 
+            // prevent rainbow-road single-track option; avoid rainbow road overdose.
+            // Occurs too often because only two paths 'out' of rainbow road when traversing
+            // the graph backwards, either Peach Stadium or Rainbow Road single-track hence
+            // this option is 'found' far too often. Not a true VS traversal but its tidier.
+            if (includeRepeat && currentId === '21' && currentId === nextId) {
+                debugLog('Rainbow Road single-track prevented purposefully');
+                continue;
+            }
+
             // determine if next path traversed already 
             // (also prevents multiple single-track events of the same track)
             const nextLinkKey = `${currentId}->${nextId}`;
