@@ -12,7 +12,8 @@ Options provides are what kind of path wanted:
 
 - 'Grand Prix' starts with a single-track, then 3 intermissions.
 - 'Knockout Tour' has 5 intermissions.
-- '_x_ races' is basically mimicking VS Mode 'Connected' type, with number of races to be used in generating the path.
+- '_x_ races' is basically mimicking VS Mode 'Open' type, but only selecting from the options from the previous track. The _x_ indicates the number of races to be used in generating the path.
+
 - 'End with Selected' causes the path to _end_ with the selected track, else the path _beings_ with it.
 - 'Include Single-Track Race(s)' is only applicable for the VS Mode options, and allows single-track (ie. 3 lap) races to be included in the output path.
 
