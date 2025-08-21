@@ -1,21 +1,22 @@
 {
   "name": "Node.js & TypeScript",
   "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
-
   // Automatically install dependencies with npm
   "postCreateCommand": "npm install",
-
   // Forward Vite dev server port (adjust if needed)
-  "forwardPorts": [5173],
-
+  "forwardPorts": [
+    5173
+  ],
   // Optional features
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
       "version": "lts"
     },
-    "ghcr.io/devcontainers/features/git:1": {}
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "1.23"
+    }
   },
-
   // VS Code customizations
   "customizations": {
     "vscode": {
@@ -26,11 +27,11 @@
       "extensions": [
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "ms-vscode.vscode-typescript-next"
+        "ms-vscode.vscode-typescript-next",
+        "golang.go"
       ]
     }
   },
-
   // Use non-root user for better file permissions
   "remoteUser": "node"
 }
