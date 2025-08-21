@@ -52,6 +52,12 @@ If a path cannot be found (ie. starting from Rainbow Road), an empty path is ret
 
 Build with `vite` and `TS`, I haven't bothered with dev or prod builds or any of that guff as this is a side-proj nothing more. Wanted to push framework-less webdev ideas a bit. Versions are above in the fancy badge things. `npm install` to build the little node env, then `npm run dev` to get it up and running. There is also a `devcontainer` set up already to make it easier because isolation just makes everything better.
 
+## Versioning
+
+### v1.0.0
+
+First 'release'. Functional and deployed.
+
 ## Credits
 
 Mario Kart World Map images provided by [u/Cube_play_8](https://www.reddit.com/user/Cube_play_8/) on [r/NintendoSwitch2](https://www.reddit.com/r/NintendoSwitch2/comments/1k00wfp/mario_kart_world_hires_map_image_extracted_from/). I cropped out the "track icons" and tidied them up a bit but this was the source.
