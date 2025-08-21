@@ -1,3 +1,3 @@
-module mkw-pathgen/go-traversal
+module go-traversal
 
 go 1.23.12
