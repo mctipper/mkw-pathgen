@@ -2,8 +2,9 @@
 
 ![Typescript 5.8.3](https://img.shields.io/badge/Typescript-5.8.3-3178C6)
 ![Vite 7.0.4](https://img.shields.io/badge/Vite-7.0.4-7F00FF)
+![Go 1.23](https://img.shields.io/badge/Go-1.23-00ADD8)
 
-Generate random cups, rallies, vs-mode (of all lengths) paths. Just for shits and gigs, a fun excuse to play with DFS traversal and building a spiffy little website for no particular reason. Wanted to 'keep it vanilla' but yeh went with Vite because it just makes basics so easy, and TS because I just prefer types really.
+Generate random cups, rallies, vs-mode (of all lengths) paths. Just for shits and gigs, a fun excuse to play with greedy DFS traversal and building a spiffy little website for no particular reason. Wanted to 'keep it vanilla' but yeh went with Vite because it just makes basics so easy, and TS because I just prefer types really.
 
 Select a track by clicking its icon, then generate a path using the options provided and clicking the 'Generate Path' button. Will do a DFS traversal and return a path, by drawing it crudely on the map and also as a list below.
 
@@ -27,19 +28,22 @@ The caveats as mentioned are either universal or specific to the mode selected.
 
 - **All modes** prevent the exact same traversal to be repeated, so once have driven A-B that path cannot repeat in the traversal again (includes single-track (ie. 3 lap) races from occuring again). I put the code in to prevent _reverse_ traversal but decided to comment it out as its really a different track tbh: 'A-B' and 'B-A' should be considered distinct.
 
-- **All modes** also prevent 'u-turns', so A-B-A is not permitted, this is to prevent back-and-forth loops. However A-B-B-A or A-B-C-D-B-A are both permitted, as there was another race before the reverse traversal (also see prev paragraph).
+- **All modes** also prevent 'u-turns', so A-B-A is not permitted, this is to prevent back-and-forth loops. However **A-B**-**B-A** or **A-B**-C-D-**B-A** are both permitted, as there was another race before the reverse traversal (also see prev paragraph).
 
 **Grand Prix** always starts with a single-track (ie. 3 lap) race, followed by 3 intermissions. Track revisiting is not permitted.
 
 **Knockout Tour** is 5 intermissions. Track revisiting is not permitted.
 
-**VS Mode** length depends on the option selected. Track revisiting is permitted, with single-track race inclusion also able to be configured.
+**VS Mode** length depends on the option selected. Track revisiting is permitted, with single-track race inclusion also able to be configured. Designed around 'Open' option, but limiting only to tracks 'connected' to the previous one. While in reality any selection is possible, the generated path algorthm prevents repeats of the _exact same_ single-track or intermission from occuring regardless of what options have been selected.
 
-If a path cannot be found (ie. starting from Rainbow Road), an empty path is returned and a little message displayed just to inform. The number of permutations is in the millions so being unable to find a path is almost zero% chance of occuring otherwise.
+### Traversal Failure
+
+If a path cannot be found (ie. starting from Rainbow Road), an empty path is returned and a little message displayed just to inform. As this is a greedy DFS implementation, with the number of permutations is in the millions, being unable to find a path from a non-Rainbow Road starting point is zero %.
 
 ## Future Enhancements
 
 - would like to get % breakdowns of each track/intermissions (with ranges for path branching) so can return the % of road coverage for the returned path.
+- compute full _counts_ of potentials GPs, Knockout Tours, VSmode paths etc.. etc.. (the latter with all the single-track inclusion, no repeat options as well). Provide from each track 'starting point' and overall total. As a Hamiltonian Cycle is not possible, instead determine how many Hamiltonian Paths exist (visiting every track once and only once). Even look at Eulerian Paths (visits every link once and only once). Will need to implement in Go or C++ due to heafty compute needed here.
 - some colour (monochrome) rendering on the map based on the resutling path remaining 'colour' and the rest going black and white
 - with the drawing animation, make the icons increase in size _as each path arrives at that track_
 - store generated paths, allow going 'back' and 'forward' though history (stored locally, session only because who cares)
@@ -53,6 +57,8 @@ If a path cannot be found (ie. starting from Rainbow Road), an empty path is ret
 Build with `vite` and `TS`, I haven't bothered with dev or prod builds or any of that guff as this is a side-proj nothing more. Wanted to push framework-less webdev ideas a bit. Versions are above in the fancy badge things. `npm install` to build the little node env, then `npm run dev` to get it up and running. There is also a `devcontainer` set up already to make it easier because isolation just makes everything better.
 
 ## Versioning
+
+Only vX.Y level is detailed here.
 
 ### v1.0.0
 
