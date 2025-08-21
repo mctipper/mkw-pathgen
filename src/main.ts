@@ -8,6 +8,9 @@ import { initTrackMapStore } from './stores/TrackMapStore';
 
 
 async function init() {
+  const version = __APP_VERSION__;
+  console.log(version);
+
   // validate that all require DOM layers have loaded
   const refs = {
     trackMapStore: document.querySelector<HTMLElement>('#track-map-store'),
