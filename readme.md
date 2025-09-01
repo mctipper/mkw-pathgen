@@ -5,7 +5,7 @@
 
 Generate random cups, rallies, vs-mode (of all lengths) paths. Just for shits and gigs, a fun excuse to play with DFS traversal and building a spiffy little website for no particular reason. Wanted to 'keep it vanilla' but yeh went with Vite because it just makes basics so easy, and TS because I just prefer types really.
 
-Select a track by clicking its icon, then generate a path using the options provided and clicking the 'Generate Path' button. Will do a DFS traversal and return a path, by drawing it crudely on the map and also as a list below.
+Select a track by clicking its icon, then generate a path using the options provided and clicking the 'Generate Path' button. Will do a DFS traversal and return a path, by drawing it crudely on the map and also as a list below. A Mario-themed "trophy" name is also generated _randomly_ for each generation.
 
 Options provides are what kind of path wanted:
 
@@ -44,7 +44,7 @@ If a path cannot be found (ie. starting from Rainbow Road), an empty path is ret
 - with the drawing animation, make the icons increase in size _as each path arrives at that track_
 - store generated paths, allow going 'back' and 'forward' though history (stored locally, session only because who cares)
 - fix up that dashed line animation yucks
-- generate a list of 00s of 'mario themed' items and give a random name to each generated path ('Poison Mushroom Cup' / 'Goomba Shoe Rally' etc...). Maybe use the % breakdown of track covered (dot-point-1) to 'guide' these so have 'ice' themed or 'lava' themed names have greater chance of being used if >x% of the track is lava etc...
+- ~~generate a list of 00s of 'mario themed' items and give a random name to each generated path ('Poison Mushroom Cup' / 'Goomba Shoe Rally' etc...). Maybe use the % breakdown of track covered (dot-point-1) to 'guide' these so have 'ice' themed or 'lava' themed names have greater chance of being used if >x% of the track is lava etc...~~ (implemented in 1.1.0)
 - the dreaded post-completion refactor: some of the modules are serving multiple purposes so should tidy that up, and give future self a hand and comment it out better. Some unit tests would have been a good idea.
 - remove the passing around of the elements between methods. Once they have been confirmed loaded its safe to `querySelector` them when needed; will just make the code tidier really (althought its not that bad really)
 
@@ -57,6 +57,16 @@ Build with `vite` and `TS`, I haven't bothered with dev or prod builds or any of
 ### v1.0.0
 
 First 'release'. Functional and deployed.
+
+#### v1.0.1
+
+Fix:
+Prevented Rainbow Road single-track being part of the path when VS\* mode option was selected with include single-track checked. As there were only two options 'out of' Rainbow Road, this caused a single-track Rainbow Road to occur very frequently, when the only option 'in to' Rainbow Road is Peach Staduim->Rainbow Road, adding in another 3 lap Rainbow Road immediately afterwards is duplicative (albeit 'a valid choice').
+
+### v1.1.0
+
+Feature:
+Added randomly generated titles to generated paths. Such as 'Goomba Shoe Classic' or 'FLUDD Gauntlet'. Adjective based on the type/length of path generated.
 
 ## Credits
 
