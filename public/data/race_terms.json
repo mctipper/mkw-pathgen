@@ -1,0 +1,50 @@
+{
+    "3": [
+        "Sprint",
+        "Scurry",
+        "Zip"
+    ],
+    "4": [
+        "Dash",
+        "Emblem",
+        "Wreath"
+    ],
+    "4gp": [
+        "Cup",
+        "Trophy"
+    ],
+    "5": [
+        "Shield",
+        "Dash",
+        "Keepsake"
+    ],
+    "6": [
+        "Classic",
+        "Runabout",
+        "Leap"
+    ],
+    "6rally": [
+        "Rally",
+        "Tour"
+    ],
+    "8": [
+        "Chase",
+        "Rush",
+        "Pulse"
+    ],
+    "12": [
+        "Enduro",
+        "Cruise",
+        "Stretch"
+    ],
+    "16": [
+        "Marathon",
+        "Iron",
+        "Voyage"
+    ],
+    "32": [
+        "Cannonball",
+        "Odyssey",
+        "Gauntlet"
+    ]
+}

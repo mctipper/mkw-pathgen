@@ -1,4 +1,6 @@
 import { getTrackMap } from "../stores/TrackMapStore";
+import { generateRaceName } from '../stores/RaceNameStore';
+
 
 export function resetPathResultsList() {
     const pathResultsText = document.querySelector('.path-results-text');
@@ -7,7 +9,7 @@ export function resetPathResultsList() {
 }
 
 
-export function renderPathResultsList(path: string[]) {
+export function renderPathResultsList(pathModeValue: string, path: string[]) {
     resetPathResultsList();
     const pathResultsText = document.querySelector('.path-results-text');
     if (!pathResultsText) return;
@@ -16,6 +18,22 @@ export function renderPathResultsList(path: string[]) {
         // if a path could not be found (i.e. Rainbow Road selected without 'end with selected')
         pathResultsText.innerHTML = 'No Path Found from Selected Track'
     }
+
+    // generate a title
+    const title = document.createElement('div');
+    title.className = 'path-results-title';
+    const titleText = document.createElement('h1')
+    if (pathModeValue === 'gp') {
+        // special condition for Grand Prix / Cup
+        titleText.innerText = generateRaceName('4gp');
+    } else if (pathModeValue === 'kt') {
+        // special condition for Rally
+        titleText.innerText = generateRaceName('6rally');
+    } else {
+        titleText.innerText = generateRaceName((path.length - 1).toString())
+    }
+    title.appendChild(titleText);
+    pathResultsText.appendChild(title);
 
     const trackMap = getTrackMap();
 

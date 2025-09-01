@@ -24,8 +24,8 @@ export function handleGenerateButtonClick(pathModeSelect: HTMLSelectElement, sel
     debugLog('Selected include single-track:', includeSingleTrackCheck.checked);
 
     // debuging running a path
+    const pathModeValue = pathModeSelect.value;
     const path = (() => {
-        const pathModeValue = pathModeSelect.value;
         if (pathModeValue === 'gp') {
             return generateGrandPrix(trackMap, selectedTrack.id, selectedTrackEnd.checked);
         }
@@ -45,7 +45,7 @@ export function handleGenerateButtonClick(pathModeSelect: HTMLSelectElement, sel
     log(`Resulting path: ${path}`);
 
     // populate the list
-    renderPathResultsList(path);
+    renderPathResultsList(pathModeValue, path);
 
     // draw the path on the map
     renderPathLines(path);
