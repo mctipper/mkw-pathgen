@@ -5,6 +5,7 @@ import { disableGenerateButton } from './ui/toggleGenerateButton';
 import { handleGenerateButtonClick } from './logic/handleGenerateButtonClick';
 import { updateSingleTrackCheckboxState } from './logic/handleDropdownSelect';
 import { initTrackMapStore } from './stores/TrackMapStore';
+import { initRaceNameStore } from './stores/RaceNameStore';
 
 
 async function init() {
@@ -13,8 +14,6 @@ async function init() {
 
   // validate that all require DOM layers have loaded
   const refs = {
-    trackMapStore: document.querySelector<HTMLElement>('#track-map-store'),
-    selectedTrackStore: document.querySelector<HTMLElement>('#selected-track-store'),
     trackIconLayer: document.querySelector<HTMLElement>('.track-icons-layer'),
     mapImg: document.querySelector<HTMLImageElement>('.base-map'),
     pathGenControls: document.querySelector<HTMLImageElement>('.map-controls'),
@@ -36,7 +35,6 @@ async function init() {
 
   // allow to pass the same elements to each listener
   const {
-    trackMapStore,
     trackIconLayer,
     mapImg,
     pathGenControls,
@@ -45,7 +43,6 @@ async function init() {
     selectedTrackEndCheck,
     includeSingleTrackCheck,
   } = refs as {
-    trackMapStore: HTMLElement;
     trackIconLayer: HTMLElement;
     mapImg: HTMLImageElement;
     pathGenControls: HTMLImageElement;
@@ -55,8 +52,9 @@ async function init() {
     includeSingleTrackCheck: HTMLInputElement;
   };
 
-  // loading in the tracks data
-  await initTrackMapStore(trackMapStore);
+  // loading in the tracks data and race names
+  await initTrackMapStore();
+  await initRaceNameStore();
 
   // handling of button disable (with override because html was being ignored)
   disableGenerateButton();
