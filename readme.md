@@ -68,6 +68,17 @@ Prevented Rainbow Road single-track being part of the path when VS\* mode option
 Feature:
 Added randomly generated titles to generated paths. Such as 'Goomba Shoe Classic' or 'FLUDD Gauntlet'. Adjective based on the type/length of path generated.
 
+#### v1.1.1
+
+Feature:
+Send-to-new-tab icon for generated path.
+
+Design:
+
+- Fonts.
+- Header design.
+- Path title font and fixed text scaling.
+
 ## Credits
 
 Mario Kart World Map images provided by [u/Cube_play_8](https://www.reddit.com/user/Cube_play_8/) on [r/NintendoSwitch2](https://www.reddit.com/r/NintendoSwitch2/comments/1k00wfp/mario_kart_world_hires_map_image_extracted_from/). I cropped out the "track icons" and tidied them up a bit but this was the source.
