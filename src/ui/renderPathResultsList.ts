@@ -1,5 +1,6 @@
 import { getTrackMap } from "../stores/TrackMapStore";
 import { generateRaceName } from '../stores/RaceNameStore';
+import { popToNewTab } from "../ui/popPathToNewTab";
 
 
 export function resetPathResultsList() {
@@ -33,6 +34,19 @@ export function renderPathResultsList(pathModeValue: string, path: string[]) {
         titleText.innerText = generateRaceName((path.length - 1).toString())
     }
     title.appendChild(titleText);
+
+    // new-tab-icon
+    const popIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    popIcon.setAttribute('width', '20');
+    popIcon.setAttribute('height', '20');
+    popIcon.setAttribute('viewBox', '0 0 24 24');
+    popIcon.style.cursor = 'pointer';
+    popIcon.innerHTML = `
+  <path fill="currentColor" d="M14,3H21V10H19V6.41L10.41,15L9,13.59L17.59,5H14V3M5,5H13V7H7V17H17V11H19V19A2,2 0 0,1 17,21H5A2,2 0 0,1 3,19V7A2,2 0 0,1 5,5Z" />
+`;
+    popIcon.onclick = popToNewTab;
+    title.appendChild(popIcon);
+
     pathResultsText.appendChild(title);
 
     const trackMap = getTrackMap();
