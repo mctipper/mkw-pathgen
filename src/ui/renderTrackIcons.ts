@@ -1,17 +1,17 @@
-import { getTrackMap } from '../stores/TrackMapStore';
-import type { Track, TrackMap } from '../types/track';
+import { getTrack, getTrackMap } from '../stores/TrackMapStore';
+import type { TrackMap } from '../types/track';
 import { handleTrackClick } from '../logic/handleTrackClick';
 // import { resetPathResultsList } from './renderPathResultsList';
 // import { resetPathLines } from './renderPathLines';
 
 export function updateIconPosition(
-    track: Track,
     icon: HTMLImageElement,
     iconSize: number,
     halfSize: number,
     scaleX: number,
     scaleY: number
 ) {
+    const track = getTrack(icon.id);
     // preserve aspect ratio of the original icon (rainbow road is rectangle, rest are square)
     const naturalRatio = icon.naturalHeight / icon.naturalWidth;
     icon.style.height = `${iconSize * naturalRatio}px`;
@@ -49,7 +49,7 @@ export function renderTrackIcons(
         icon.src = `${import.meta.env.BASE_URL}images/track-icons/${track.icon}`;
         icon.alt = track.names.en_gb;
         icon.style.position = 'absolute';
-        updateIconPosition(track, icon, iconSize, halfSize, scaleX, scaleY);
+        updateIconPosition(icon, iconSize, halfSize, scaleX, scaleY);
 
         // listen to clicks to see if that icon was clicked (or not!)
         icon.addEventListener('click', () => {
