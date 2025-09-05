@@ -54,33 +54,11 @@ Build with `vite` and `TS`, I haven't bothered with dev or prod builds or any of
 
 ## Versioning
 
-### v1.0.0
-
-First 'release'. Functional and deployed.
-
-#### v1.0.1
-
-Fix:
-Prevented Rainbow Road single-track being part of the path when VS\* mode option was selected with include single-track checked. As there were only two options 'out of' Rainbow Road, this caused a single-track Rainbow Road to occur very frequently, when the only option 'in to' Rainbow Road is Peach Staduim->Rainbow Road, adding in another 3 lap Rainbow Road immediately afterwards is duplicative (albeit 'a valid choice').
-
-### v1.1.0
-
-Feature:
-Added randomly generated titles to generated paths. Such as 'Goomba Shoe Classic' or 'FLUDD Gauntlet'. Adjective based on the type/length of path generated.
-
-#### v1.1.1
-
-Feature:
-Send-to-new-tab icon for generated path.
-
-Design:
-
-- Fonts.
-- Header design.
-- Path title font and fixed text scaling.
+[View version/release details](version.md)
 
 ## Credits
 
-Mario Kart World Map images provided by [u/Cube_play_8](https://www.reddit.com/user/Cube_play_8/) on [r/NintendoSwitch2](https://www.reddit.com/r/NintendoSwitch2/comments/1k00wfp/mario_kart_world_hires_map_image_extracted_from/). I cropped out the "track icons" and tidied them up a bit but this was the source.
+Mario Kart World Map images provided by [u/Cube_play_8](https://www.reddit.com/user/Cube_play_8/) on [r/NintendoSwitch2](https://www.reddit.com/r/NintendoSwitch2/comments/1k00wfp/mario_kart_world_hires_map_image_extracted_from/).  
+Track icon images provided by [Mariowiki.com](https://www.mariowiki.com/Gallery:Mario_Kart_World#Track_selection_icons).
 
 Everything is owned by Nintendo obviously. I did this for fun and aint making a single cent nor an iota of clout from it.
